@@ -1,10 +1,11 @@
 import "./App.css";
-import Templates from "./Form/template";
+import Form from "./Form/form";
+import Template from "./Form/template";
 
 function App() {
   return (
     <div>
-      <Templates />
+      <Template />
     </div>
   );
 }
