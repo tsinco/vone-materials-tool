@@ -1,23 +1,52 @@
 import Form from "./form";
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import reducer from "./reducer";
 
 const Templates: React.FC = () => {
+  const [available, setAvailable] = useState(false);
   const [state, dispatch] = useReducer(reducer, {
     type: "",
     name: "",
     expiration: new Date(),
   });
+  const handleOnclick = (template: any) => (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    dispatch(template);
+    setAvailable(true);
+  };
   return (
     <main>
       <div>
-        <input name="type" type="text" value={state.type} />
-        <input name="name" type="text" value={state.name} />
-        <button onClick={() => dispatch({ type: "Cond2" })}>Cond2</button>
-        <button onClick={() => dispatch({ type: "Flex2" })}>Flex2</button>
-        <button onClick={() => dispatch({ type: "Blank" })}>Blank</button>
+        {!available ? (
+          <div>
+            <button
+              className="button"
+              onClick={handleOnclick({ type: "Blank" })}
+            >
+              Blank
+            </button>
+            <button
+              className="button"
+              onClick={handleOnclick({ type: "Cond2" })}
+            >
+              Cond2
+            </button>
+            <button
+              className="button"
+              onClick={handleOnclick({ type: "Flex2" })}
+            >
+              Flex2
+            </button>
+          </div>
+        ) : null}
       </div>
-      {/* <Form {...state}> </Form> */}
+      {available ? (
+        <div>
+          <button onClick={() => setAvailable(false)}>Back to Templates</button>
+          <Form {...state}> </Form>
+        </div>
+      ) : null}
     </main>
   );
 };
