@@ -1,13 +1,12 @@
-import Form from "./form";
+import Form from "./Form/inkForm";
 import { useReducer, useState } from "react";
-import reducer from "./reducer";
+import reducer from "./Form/reducer";
 
-const Templates: React.FC = () => {
+const Home: React.FC = () => {
   const [available, setAvailable] = useState(false);
   const [state, dispatch] = useReducer(reducer, {
-    type: "",
+    inktype: "",
     name: "",
-    expiration: new Date(),
   });
   const handleOnclick = (template: any) => (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -51,4 +50,4 @@ const Templates: React.FC = () => {
   );
 };
 
-export default Templates;
+export default Home;

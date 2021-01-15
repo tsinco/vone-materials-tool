@@ -1,11 +1,11 @@
 import "./App.css";
-import Template from "./Form/template";
+import Home from "./Home";
 
 function App() {
   return (
     <div className="body">
       <h2>Ink Form Generator</h2>
-      <Template />
+      <Home />
     </div>
   );
 }
