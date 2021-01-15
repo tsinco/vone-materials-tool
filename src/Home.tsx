@@ -7,6 +7,8 @@ const Home: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, {
     inktype: "",
     name: "",
+    pass_spacing: 0,
+    dispense_height: 0,
   });
   const handleOnclick = (template: any) => (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

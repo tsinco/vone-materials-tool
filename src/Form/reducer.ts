@@ -8,12 +8,16 @@ function reducer(state: any, action: InkType) {
     case "Cond2":
       return {
         inktype: "Cond2",
-        name: "Pizza",
+        name: "MuscularMermaid",
+        pass_spacing: 0.15,
+        dispense_height: 0.1,
       };
     case "Flex2":
       return {
         inktype: "Flex2",
-        name: "BigMac",
+        name: "ZanyZebrafish",
+        pass_spacing: 0.2,
+        dispense_height: 0.15,
       };
     case "Blank":
       return {
