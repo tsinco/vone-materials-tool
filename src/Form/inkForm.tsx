@@ -11,7 +11,7 @@ interface profile {
 }
 
 const Form: React.FC<profile> = (props) => {
-  const { handleSubmit, register, errors } = useForm<profile>({
+  const { handleSubmit, register } = useForm<profile>({
     defaultValues: {
       ...props,
     },

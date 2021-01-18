@@ -25,7 +25,7 @@ function reducer(state: any, action: InkType) {
         name: "",
       };
     default:
-      return null;
+      return state;
   }
 }
 

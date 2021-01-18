@@ -40,14 +40,15 @@ const Home: React.FC = () => {
               Flex2
             </button>
           </div>
-        ) : null}
+        ) : (
+          <div>
+            <button onClick={() => setAvailable(false)}>
+              Back to Templates
+            </button>
+            <Form {...state}> </Form>
+          </div>
+        )}
       </div>
-      {available ? (
-        <div>
-          <button onClick={() => setAvailable(false)}>Back to Templates</button>
-          <Form {...state}> </Form>
-        </div>
-      ) : null}
     </main>
   );
 };
