@@ -1,6 +1,6 @@
-import Form from "./Form/inkForm";
+import Form from "./inkForm";
 import { useReducer, useState } from "react";
-import reducer from "./Form/reducer";
+import reducer from "./reducer";
 
 const Home: React.FC = () => {
   const [available, setAvailable] = useState(false);
