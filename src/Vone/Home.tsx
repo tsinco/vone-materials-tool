@@ -1,9 +1,13 @@
 import Form from "./inkForm";
 import { useReducer, useState } from "react";
 import reducer from "./reducer";
+import { useAuth } from "../Components/AuthContext";
+import { useHistory } from "react-router-dom";
 
 const Home: React.FC = () => {
   const [available, setAvailable] = useState(false);
+  const { logout }: any = useAuth();
+  const history = useHistory();
   const [state, dispatch] = useReducer(reducer, {
     inktype: "",
     name: "",
@@ -16,8 +20,21 @@ const Home: React.FC = () => {
     dispatch(template);
     setAvailable(true);
   };
+  async function handleLogout() {
+    try {
+      await logout();
+    } catch {
+      console.log("Failed to log in");
+    } finally {
+      console.log("done");
+      history.push("/login");
+    }
+  }
   return (
     <main>
+      <button className="button" onClick={handleLogout}>
+        Logout
+      </button>
       <div>
         {!available ? (
           <div>
