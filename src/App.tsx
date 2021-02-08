@@ -1,34 +1,23 @@
 import { Container } from "react-bootstrap";
 import React from "react";
-import Home from "./Vone/Home";
+import Home from "./Components/Forms/Vone/VoneHome";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from "./Components/Login";
-import Signup from "./Components/Signup";
-import AuthProvider from "./Components/AuthContext";
-import PrivateRoute from "./Components/PrivateRoute";
+import Login from "./Components/Authentication/Login";
+import Signup from "./Components/Authentication/Signup";
+import AuthProvider from "./Components/Authentication/AuthContext";
+import PrivateRoute from "./Components/Authentication/PrivateRoute";
+import Sidebar from "./Components/SideNav/Sidebar";
 function App() {
   return (
-    // <AuthProvider>
-    //   <Router>
-    //     <div>
-    //       {/* <Route exact path="/" component={Home}></Route> */}
-    //       <Route exact path="login" component={Login}></Route>
-    //       <Route exact path="signup" component={Signup}></Route>
-    //     </div>
-    //   </Router>
-    //   {/* <div className={"body"}>
-    //     <h2>Ink Form Generator</h2>
-    //   </div> */}
-    // </AuthProvider>
     <Router>
       <AuthProvider>
         <Switch>
           <React.Fragment>
+            <PrivateRoute exact path="/" component={Home}></PrivateRoute>
             <Container
               className="d-flex align-items-center justify-content-center"
               style={{ minHeight: "100vh" }}
             >
-              <PrivateRoute exact path="/" component={Home}></PrivateRoute>
               <Route exact path="/login" component={Login}></Route>
               <Route exact path="/signup" component={Signup}></Route>
             </Container>
