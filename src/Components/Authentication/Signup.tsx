@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useState, useRef, useContext } from "react";
+import { useState, useRef } from "react";
 import { useAuth } from "./AuthContext";
 import { Link, useHistory } from "react-router-dom";
 

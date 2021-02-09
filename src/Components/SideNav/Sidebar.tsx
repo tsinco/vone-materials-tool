@@ -1,8 +1,9 @@
 import React from "react";
 import "./SideNav.css";
 import { SidebarData } from "./SidebarData";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-function Sidebar() {
+import Logout from "../Authentication/Logout";
+
+const Sidebar: React.FC = () => {
   return (
     <div className="Sidebar">
       <ul className="SidebarList">
@@ -21,9 +22,10 @@ function Sidebar() {
             </li>
           );
         })}
+        <Logout />
       </ul>
     </div>
   );
-}
+};
 
 export default Sidebar;

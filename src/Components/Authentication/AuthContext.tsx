@@ -2,12 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import app from "./Firebase";
 import * as React from "react";
 import { auth } from "./Firebase";
-import { useWatch } from "react-hook-form";
 
-interface account {
-  email?: string;
-  password?: any;
-}
 const AuthContext = React.createContext({});
 export function useAuth() {
   return useContext(AuthContext);
