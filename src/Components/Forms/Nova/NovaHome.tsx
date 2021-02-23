@@ -23,7 +23,6 @@ const NovaHome: React.FC = () => {
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "50vh" }}
       >
-        {/* <button onClick={() => setSelected(false)}>Back </button> */}
         {!selected ? (
           <>
             <button className="button" onClick={handleOnclick("Ink")}>

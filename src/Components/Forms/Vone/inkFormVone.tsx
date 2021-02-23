@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import download from "./download";
-import "./form.css";
+import "../form.css";
 interface profile {
   name?: string;
   inktype?: string;
@@ -21,39 +21,44 @@ const Form: React.FC<profile> = (props) => {
   });
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <h3>Details</h3>
+    <div className="Body">
+      <form onSubmit={onSubmit}>
+        <div>
+          <h3>Details</h3>
 
-        <label htmlFor="inktype">Ink Type</label>
-        <input name="inktype" type="text" ref={register({ required: true })} />
-        <label htmlFor="name"> Name</label>
-        <input name="name" type="text" ref={register({ required: true })} />
-        <label htmlFor="expiration"> Expiration Date: </label>
-        <input
-          name="expiration"
-          type="date"
-          ref={register({ required: true })}
-        />
-      </div>
-      <div>
-        <h3>Values</h3>
-        <input
-          name="pass_spacing"
-          type="number"
-          step="0.01"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="pass_spacing"> Pass Spacing</label>
-        <input
-          name="dispense_height"
-          type="number"
-          step="0.01"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="dispense_height"> Dispense Height</label>
+          <label htmlFor="inktype">Ink Type</label>
+          <input
+            name="inktype"
+            type="text"
+            ref={register({ required: true })}
+          />
+          <label htmlFor="name"> Name</label>
+          <input name="name" type="text" ref={register({ required: true })} />
+          <label htmlFor="expiration"> Expiration Date: </label>
+          <input
+            name="expiration"
+            type="date"
+            ref={register({ required: true })}
+          />
+        </div>
+        <div>
+          <h3>Values</h3>
+          <input
+            name="pass_spacing"
+            type="number"
+            step="0.01"
+            ref={register({ required: true })}
+          />
+          <label htmlFor="pass_spacing"> Pass Spacing</label>
+          <input
+            name="dispense_height"
+            type="number"
+            step="0.01"
+            ref={register({ required: true })}
+          />
+          <label htmlFor="dispense_height"> Dispense Height</label>
 
-        {/* <input
+          {/* <input
           name="Anti-stringing-distance"
           type="number"
           ref={register({ required: true })}
@@ -74,9 +79,10 @@ const Form: React.FC<profile> = (props) => {
           ref={register({ required: true })}
         />
         <label htmlFor="Trimlength">Trim lenth</label> */}
-      </div>
-      <button type="submit">submit</button>
-    </form>
+        </div>
+        <button type="submit">submit</button>
+      </form>
+    </div>
   );
 };
 export default Form;

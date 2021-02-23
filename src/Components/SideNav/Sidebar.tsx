@@ -22,8 +22,8 @@ const Sidebar: React.FC = () => {
             </li>
           );
         })}
-        <Logout />
       </ul>
+      <Logout />
     </div>
   );
 };

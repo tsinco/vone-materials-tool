@@ -18,6 +18,7 @@ function AuthProvider({ children }: any) {
   function login(email: string, password: any) {
     return auth.signInWithEmailAndPassword(email, password);
   }
+
   function logout() {
     return auth.signOut();
   }

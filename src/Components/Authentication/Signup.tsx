@@ -20,26 +20,22 @@ const Signup: React.FC = () => {
   const { signup }: any = useAuth();
   const history = useHistory();
 
-  async function onSubmit() {
+  async function onSubmit(e: React.ChangeEvent<HTMLInputElement>) {
     if (
-      passwordRef.current?.value !== confirmpasswordRef.current?.value &&
-      !null
+      passwordRef.current?.value == confirmpasswordRef.current?.value &&
+      emailRef.current?.value.includes("voltera.io")
     ) {
-      setError("Password doesn't match");
-    }
-    if (!emailRef.current?.value.includes("voltera.io")) {
-      setError("Invalid Email");
-    } else {
       try {
         setError("");
         setLoading(true);
         await signup(emailRef.current?.value, passwordRef.current?.value);
         history.push("/");
       } catch {
-        setError("Something went wrong");
+        setError("existing user or unauthorized email");
       }
+    } else {
+      setError("Invalid Password or Email");
       setLoading(false);
-      history.push("/");
     }
   }
   // const onSubmit = handleSubmit(() => {

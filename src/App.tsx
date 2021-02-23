@@ -1,32 +1,18 @@
 import { Container } from "react-bootstrap";
 import React from "react";
 import Home from "./Components/Home";
-import VoneHome from "./Components/Forms/Vone/VoneHome";
-import NovaHome from "./Components/Forms/Nova/NovaHome";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./Components/Authentication/Login";
 import Signup from "./Components/Authentication/Signup";
 import AuthProvider from "./Components/Authentication/AuthContext";
 import PrivateRoute from "./Components/Authentication/PrivateRoute";
-import Sidebar from "./Components/SideNav/Sidebar";
 function App() {
   return (
     <Router>
       <AuthProvider>
         <Switch>
           <React.Fragment>
-            <Sidebar />
             <PrivateRoute exact path="/" component={Home}></PrivateRoute>
-            <PrivateRoute
-              exact
-              path="/Home/Vone"
-              component={VoneHome}
-            ></PrivateRoute>
-            <PrivateRoute
-              exact
-              path="/Home/Nova"
-              component={NovaHome}
-            ></PrivateRoute>
             <Container
               className="d-flex align-items-center justify-content-center"
               style={{ minHeight: "100vh" }}

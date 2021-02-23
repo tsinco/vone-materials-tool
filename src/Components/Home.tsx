@@ -3,6 +3,7 @@ import "./Home.css";
 import { useState } from "react";
 import NovaHome from "./Forms/Nova/NovaHome";
 import VoneHome from "./Forms/Vone/VoneHome";
+import Sidebar from "./SideNav/Sidebar";
 const Home: React.FC = () => {
   // const NovaRef = useRef<HTMLLinkElement>();
   // const VoneRef = useRef<HTMLLinkElement>();
@@ -20,28 +21,31 @@ const Home: React.FC = () => {
       setVone(true);
     }
   };
-
+  const BacktoPlatform = () => {
+    setSelected(false);
+    setNova(false);
+    setVone(false);
+  };
   return (
-    <>
-      <h2 className="d-flex align-items-center justify-content-center">
-        Select Platform
-      </h2>
-      <div
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "50vh" }}
-      >
-        {!selected ? (
-          <div>
-            <a onClick={handleOnclick("Nova")}>Nova</a>
-            <a onClick={handleOnclick("Vone")}>Vone</a>
-          </div>
-        ) : nova ? (
-          <NovaHome />
-        ) : (
-          <VoneHome />
-        )}
+    <div className="grid-container">
+      <Sidebar />
+      <div className="Back">
+        <a onClick={BacktoPlatform}>{"<<Back"}</a>
       </div>
-    </>
+      {!selected ? (
+        <div className="Main">
+          <h2 className="Title">Select Platform</h2>
+          <div className="Body" style={{ minHeight: "50vh" }}>
+            <a onClick={handleOnclick("Vone")}>Vone</a>
+            <a onClick={handleOnclick("Nova")}>Nova</a>
+          </div>
+        </div>
+      ) : nova ? (
+        <NovaHome />
+      ) : (
+        <VoneHome />
+      )}
+    </div>
   );
 };
 export default Home;
