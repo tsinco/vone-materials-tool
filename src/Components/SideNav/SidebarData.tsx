@@ -3,6 +3,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
+//change to hook to avoir rerendering?
 export const SidebarData = [
   {
     title: "Account",

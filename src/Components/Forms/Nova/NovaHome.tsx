@@ -11,7 +11,7 @@ const NovaHome: React.FC = () => {
   ) => {
     console.log(Type);
     setSelected(true);
-    if (Type == "ink") {
+    if (Type === "ink") {
       setInk(true);
     } else {
       setSubstrate(true);

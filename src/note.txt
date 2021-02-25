@@ -1,0 +1,8 @@
+- log in via google
+- forgot password link
+- add Nova (reuse code from Vone if possible) 
+- read and write on Firebase
+- import UI components from Vone app (https://github.com/VolteraInc/concept-ink/tree/master/packages/ui/src)
+- database security
+- set loading icon on each request/call
+- 404 error

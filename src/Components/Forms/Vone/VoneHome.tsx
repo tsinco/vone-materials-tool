@@ -13,23 +13,31 @@ const InitialState = {
 const VoneHome: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
   const [istemplateSelected, setTemplateSelected] = useState(false);
-  const [active, setActive] = useState("");
-  const [values, setValues] = useState({ pass_spacing: 0, dispense_height: 0 });
+  const [details, setDetails] = useState("");
+  const [values, setValues] = useState(InitialState);
   const [state, dispatch] = useReducer(reducer, {
     InitialState,
   });
-  const handleOnclick = (action: any, data: any) => () => {
+  const handleOnclick = (action: any) => () => {
     dispatch(action);
     setTemplateAvailable(true);
-    console.log(data);
   };
-  const handleOnselect = (name: string, data: any) => {
-    if (!istemplateSelected) {
-      setActive(name);
+  const handleOnselect = (inkname: any, data: any) => {
+    if (!istemplateSelected && details !== inkname) {
+      setDetails(inkname);
+      setValues(data);
+      setTemplateSelected(true);
+    }
+    if (istemplateSelected && details === inkname) {
+      setDetails("");
+      setValues(InitialState);
+      setTemplateSelected(false);
+    }
+    if (istemplateSelected && details !== inkname) {
+      setDetails(inkname);
       setValues(data);
       setTemplateSelected(true);
     } else {
-      setTemplateSelected(false);
     }
   };
   return (
@@ -44,10 +52,10 @@ const VoneHome: React.FC = () => {
                   key={key}
                   className="row"
                   onClick={() => {
-                    handleOnselect(val.name, val.values);
+                    handleOnselect(val.details, val.values);
                   }}
                 >
-                  <div id="name">{val.name}</div>
+                  <div id="name">{val.details.name}</div>
                 </a>
               );
             })}
@@ -59,33 +67,35 @@ const VoneHome: React.FC = () => {
           >
             <button
               className="button"
-              onClick={handleOnclick({ type: "Blank Template" }, InitialState)}
+              onClick={handleOnclick({
+                type: "Blank Template",
+                payload: InitialState,
+              })}
             >
               Blank Template
             </button>
             <button
               disabled={!istemplateSelected}
               className="button"
-              onClick={handleOnclick(
-                {
-                  type: "Use as Template",
-                },
-                values
-              )}
+              onClick={handleOnclick({
+                type: "Use as Template",
+                payload: values,
+                description: details,
+              })}
             >
               Use as Template
             </button>
             <button
               disabled={!istemplateSelected}
               className="button"
-              onClick={handleOnclick({ type: "Update" }, values)}
+              onClick={handleOnclick({ type: "Update" })}
             >
               Update
             </button>
             <button
               disabled={!istemplateSelected}
               className="button"
-              onClick={handleOnclick({ type: "Delete" }, values)}
+              onClick={handleOnclick({ type: "Delete" })}
             >
               Delete
             </button>

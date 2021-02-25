@@ -22,7 +22,7 @@ const Signup: React.FC = () => {
 
   async function onSubmit(e: React.ChangeEvent<HTMLInputElement>) {
     if (
-      passwordRef.current?.value == confirmpasswordRef.current?.value &&
+      passwordRef.current?.value === confirmpasswordRef.current?.value &&
       emailRef.current?.value.includes("voltera.io")
     ) {
       try {
@@ -38,10 +38,6 @@ const Signup: React.FC = () => {
       setLoading(false);
     }
   }
-  // const onSubmit = handleSubmit(() => {
-  //   signup(emailRef.current?.value, passwordRef.current?.value);
-  //   history.push("/");
-  // });
   return (
     <Card style={{ width: "25rem" }}>
       <Card.Body>
