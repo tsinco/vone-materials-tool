@@ -2,6 +2,7 @@ import Form from "./inkFormVone";
 import { useReducer, useState } from "react";
 import reducer from "./reducer";
 import { MaterialsData } from "./MaterialsData";
+import ShowMaterials from "../ShowMaterials";
 
 const InitialState = {
   inktype: "",
@@ -46,7 +47,7 @@ const VoneHome: React.FC = () => {
         <div>
           <h2 className="Title">Select Material</h2>
           <ul>
-            {MaterialsData.map((val, key) => {
+            {/* {MaterialsData.map((val, key) => {
               return (
                 <a
                   key={key}
@@ -58,7 +59,8 @@ const VoneHome: React.FC = () => {
                   <div id="name">{val.details.name}</div>
                 </a>
               );
-            })}
+            })} */}
+            <ShowMaterials />
           </ul>
 
           <div

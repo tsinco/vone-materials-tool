@@ -7,7 +7,7 @@ type Type = {
 function reducer(state: any, action: Type) {
   switch (action.type) {
     case "Use as Template":
-      return action.payload;
+      return action.payload, action.description;
     case "Update":
       return {};
     case "Delete":

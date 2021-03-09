@@ -6,3 +6,6 @@
 - database security
 - set loading icon on each request/call
 - 404 error
+
+-- action buttons in separate page
+--reducer types in separate page

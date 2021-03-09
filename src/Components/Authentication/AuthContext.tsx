@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import app from "./Firebase";
 import * as React from "react";
-import { auth } from "./Firebase";
+import { auth, authGoogle } from "./Firebase";
 
 const AuthContext = React.createContext({});
 export function useAuth() {
@@ -22,7 +22,9 @@ function AuthProvider({ children }: any) {
   function logout() {
     return auth.signOut();
   }
-
+  function googlelogin() {
+    return auth.signInWithPopup(authGoogle);
+  }
   useEffect(() => {
     app.auth().onAuthStateChanged((user: any) => {
       setCurrentUser(user);
@@ -33,6 +35,7 @@ function AuthProvider({ children }: any) {
     currentUser,
     signup,
     login,
+    googlelogin,
     logout,
   };
 

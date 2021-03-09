@@ -5,8 +5,6 @@ import NovaHome from "./Forms/Nova/NovaHome";
 import VoneHome from "./Forms/Vone/VoneHome";
 import Sidebar from "./SideNav/Sidebar";
 const Home: React.FC = () => {
-  // const NovaRef = useRef<HTMLLinkElement>();
-  // const VoneRef = useRef<HTMLLinkElement>();
   const [selected, setSelected] = useState(false);
   const [nova, setNova] = useState(false);
   const [vone, setVone] = useState(false);
