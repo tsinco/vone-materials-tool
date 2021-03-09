@@ -1,34 +1,32 @@
 import { db } from "../Authentication/Firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+//change to function getMaterials
 const ShowMaterials: React.FC = () => {
-  const [data, setData] = useState("");
+  const [data, setData] = useState([""]);
   const VoneCollection = db.collection("Vone");
 
-  // docRef.get().then((querySnapshot) => {
-  //   querySnapshot.docs.forEach((result) => {
-  //     setData(data => [...data, result.data()]);
-  //   });
-
-  // VoneCollection.get().then((querySnapshot) => {
-  //   querySnapshot.forEach((result) => {
-  //     setData(result.data()["name"]);
-  //     console.log(result.data()["name"]);
-  //   });
-  // });
+  useEffect(() => {
+    try {
+      VoneCollection.get().then((querySnapshot) => {
+        querySnapshot.docs.forEach((result) => {
+          setData((arr) => [...arr, JSON.stringify(result.data())]);
+          console.log(data);
+        });
+      });
+    } catch {
+      console.error();
+    }
+  }, []);
   return (
     <div>
       <ul>
-        {VoneCollection.get().then((querySnapshot) => {
-          querySnapshot.forEach((result) => {
-            return (
-              <a key={result.id}>
-                <div>{result.data()["name"]}</div>
-              </a>
-            );
-            // setData(result.data()["name"]);
-            // console.log(result.data()["name"]);
-          });
+        {data.map((val) => {
+          return (
+            <a className="row">
+              <div>{val}</div>
+            </a>
+          );
         })}
       </ul>
     </div>
