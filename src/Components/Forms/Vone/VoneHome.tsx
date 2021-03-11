@@ -1,10 +1,14 @@
 import Form from "./inkFormVone";
-import { useReducer, useState } from "react";
-import reducer from "./reducer";
-import { MaterialsData } from "./MaterialsData";
-import ShowMaterials from "../ShowMaterials";
+import { useState } from "react";
+import { Showmaterials } from "../Buttons/action";
+import {
+  blanktemplate,
+  usetemplate,
+  updatetemplate,
+  deletetemplate,
+} from "../Buttons/action";
 
-const InitialState = {
+const initialTemplate = {
   inktype: "",
   name: "",
   pass_spacing: 0,
@@ -14,29 +18,20 @@ const InitialState = {
 const VoneHome: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
   const [istemplateSelected, setTemplateSelected] = useState(false);
+  const [template, setTemplate] = useState(initialTemplate);
   const [details, setDetails] = useState("");
-  const [values, setValues] = useState(InitialState);
-  const [state, dispatch] = useReducer(reducer, {
-    InitialState,
-  });
-  const handleOnclick = (action: any) => () => {
-    dispatch(action);
-    setTemplateAvailable(true);
-  };
-  const handleOnselect = (inkname: any, data: any) => {
+
+  const handleOnselect = (inkname: any) => {
     if (!istemplateSelected && details !== inkname) {
       setDetails(inkname);
-      setValues(data);
       setTemplateSelected(true);
     }
     if (istemplateSelected && details === inkname) {
       setDetails("");
-      setValues(InitialState);
       setTemplateSelected(false);
     }
     if (istemplateSelected && details !== inkname) {
       setDetails(inkname);
-      setValues(data);
       setTemplateSelected(true);
     } else {
     }
@@ -47,20 +42,19 @@ const VoneHome: React.FC = () => {
         <div>
           <h2 className="Title">Select Material</h2>
           <ul>
-            {/* {MaterialsData.map((val, key) => {
+            {Showmaterials().data.map((val, key) => {
               return (
                 <a
                   key={key}
                   className="row"
                   onClick={() => {
-                    handleOnselect(val.details, val.values);
+                    handleOnselect(val);
                   }}
                 >
-                  <div id="name">{val.details.name}</div>
+                  <div id="name">{val}</div>
                 </a>
               );
-            })} */}
-            <ShowMaterials />
+            })}
           </ul>
 
           <div
@@ -69,35 +63,36 @@ const VoneHome: React.FC = () => {
           >
             <button
               className="button"
-              onClick={handleOnclick({
-                type: "Blank Template",
-                payload: InitialState,
-              })}
+              onClick={() => {
+                blanktemplate();
+              }}
             >
               Blank Template
             </button>
             <button
               disabled={!istemplateSelected}
               className="button"
-              onClick={handleOnclick({
-                type: "Use as Template",
-                payload: values,
-                description: details,
-              })}
+              onClick={() => {
+                usetemplate(details);
+              }}
             >
               Use as Template
             </button>
             <button
               disabled={!istemplateSelected}
               className="button"
-              onClick={handleOnclick({ type: "Update" })}
+              onClick={() => {
+                updatetemplate(details);
+              }}
             >
               Update
             </button>
             <button
               disabled={!istemplateSelected}
               className="button"
-              onClick={handleOnclick({ type: "Delete" })}
+              onClick={() => {
+                deletetemplate(details);
+              }}
             >
               Delete
             </button>
@@ -108,7 +103,7 @@ const VoneHome: React.FC = () => {
           <button onClick={() => setTemplateAvailable(false)}>
             Back to Templates
           </button>
-          <Form {...state}> </Form>
+          <Form {...template}> </Form>
         </div>
       )}
     </div>
