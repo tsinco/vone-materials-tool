@@ -1,43 +1,109 @@
 import { useState } from "react";
-import DisplayInk from "./DisplayInk";
-import DisplaySubs from "./DisplaySubs";
-
+import { Loadmaterials_Nova } from "../Buttons/action";
+import {
+  blanktemplate,
+  usetemplate,
+  updatetemplate,
+  deletetemplate,
+} from "../Buttons/action";
+const initialTemplate = {
+  inktype: "",
+  name: "",
+  pass_spacing: 0,
+  dispense_height: 0,
+};
 const NovaHome: React.FC = () => {
-  const [selected, setSelected] = useState(false);
-  const [ink, setInk] = useState(false);
-  const [substrate, setSubstrate] = useState(false);
-  const handleOnclick = (Type: string) => (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    console.log(Type);
-    setSelected(true);
-    if (Type === "ink") {
-      setInk(true);
+  const [istemplateavailable, setTemplateAvailable] = useState(false);
+  const [istemplateSelected, setTemplateSelected] = useState(false);
+  const [template, setTemplate] = useState(initialTemplate);
+  const [details, setDetails] = useState("");
+
+  const handleOnselect = (inkname: any) => {
+    if (!istemplateSelected && details !== inkname) {
+      setDetails(inkname);
+      setTemplateSelected(true);
+    }
+    if (istemplateSelected && details === inkname) {
+      setDetails("");
+      setTemplateSelected(false);
+    }
+    if (istemplateSelected && details !== inkname) {
+      setDetails(inkname);
+      setTemplateSelected(true);
     } else {
-      setSubstrate(true);
     }
   };
   return (
-    <div className="body">
-      <div
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "50vh" }}
-      >
-        {!selected ? (
-          <>
-            <button className="button" onClick={handleOnclick("Ink")}>
-              Ink
+    <div className="Main">
+      {!istemplateavailable ? (
+        <div>
+          <h2 className="Title">Select Material</h2>
+          <ul>
+            {Loadmaterials_Nova().data.map((val, key) => {
+              return (
+                <a
+                  key={key}
+                  className="row"
+                  onClick={() => {
+                    handleOnselect(val);
+                  }}
+                >
+                  <div id="name">{val}</div>
+                </a>
+              );
+            })}
+          </ul>
+
+          <div
+            className="d-flex align-items-center justify-content-center"
+            style={{ minHeight: "100vh" }}
+          >
+            {/* reuse action buttons from vone */}
+            <button
+              className="button"
+              onClick={() => {
+                blanktemplate();
+              }}
+            >
+              Blank Template
             </button>
-            <button className="button" onClick={handleOnclick("Substrate")}>
-              Substrate
+            <button
+              disabled={!istemplateSelected}
+              className="button"
+              onClick={() => {
+                usetemplate(details);
+              }}
+            >
+              Use as Template
             </button>
-          </>
-        ) : ink ? (
-          <DisplayInk />
-        ) : (
-          <DisplaySubs />
-        )}
-      </div>
+            <button
+              disabled={!istemplateSelected}
+              className="button"
+              onClick={() => {
+                updatetemplate(details);
+              }}
+            >
+              Update
+            </button>
+            <button
+              disabled={!istemplateSelected}
+              className="button"
+              onClick={() => {
+                deletetemplate(details);
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <button onClick={() => setTemplateAvailable(false)}>
+            Back to Templates
+          </button>
+          {/* <Form {...template}> </Form> */}
+        </div>
+      )}
     </div>
   );
 };

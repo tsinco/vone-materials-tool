@@ -1,13 +1,12 @@
 import Form from "./inkFormVone";
 import { useState } from "react";
-import { Showmaterials } from "../Buttons/action";
+import { Loadmaterials_Vone } from "../Buttons/action";
 import {
   blanktemplate,
   usetemplate,
   updatetemplate,
   deletetemplate,
 } from "../Buttons/action";
-
 const initialTemplate = {
   inktype: "",
   name: "",
@@ -42,7 +41,7 @@ const VoneHome: React.FC = () => {
         <div>
           <h2 className="Title">Select Material</h2>
           <ul>
-            {Showmaterials().data.map((val, key) => {
+            {Loadmaterials_Vone().data.map((val, key) => {
               return (
                 <a
                   key={key}
@@ -61,6 +60,7 @@ const VoneHome: React.FC = () => {
             className="d-flex align-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
           >
+            {/* reuse action buttons from vone */}
             <button
               className="button"
               onClick={() => {

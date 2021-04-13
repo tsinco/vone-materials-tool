@@ -13,6 +13,9 @@
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
     "@types/react-router-dom": "^5.1.7",
+    "@volterainc/ink-database": "^1.0.2",
+    "@volterainc/service-reporting": "^2.2.3",
+    "@volterainc/utils-ink": "^1.0.2",
     "bootstrap": "^4.6.0",
     "firebase": "^8.2.4",
     "react": "^17.0.1",
@@ -22,6 +25,7 @@
     "react-hook-form": "^6.14.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "request-promise-native": "^1.0.9",
     "snyk": "^1.439.0",
     "typescript": "^4.1.3",
     "web-vitals": "^0.2.4"
@@ -50,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/request-promise-native": "^1.0.17"
   }
 }

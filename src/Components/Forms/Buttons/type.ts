@@ -12,3 +12,8 @@ export type UpdateTemplate = {
 export type DeleteTemplate = {
   inkID: string;
 };
+export type DatabaseInfo = {
+  version: string;
+  url?: string;
+  eTag: string;
+};
