@@ -1,23 +1,11 @@
 import Form from "./inkFormVone";
 import { useState } from "react";
-import { Loadmaterials_Vone } from "../Buttons/action";
-import {
-  blanktemplate,
-  usetemplate,
-  updatetemplate,
-  deletetemplate,
-} from "../Buttons/action";
-const initialTemplate = {
-  inktype: "",
-  name: "",
-  pass_spacing: 0,
-  dispense_height: 0,
-};
+import { Loadmaterials_Vone } from "../Database/VoneMaterials";
+import ActionButton from "../Buttons/actionButtons";
 
 const VoneHome: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
   const [istemplateSelected, setTemplateSelected] = useState(false);
-  const [template, setTemplate] = useState(initialTemplate);
   const [details, setDetails] = useState("");
 
   const handleOnselect = (inkname: any) => {
@@ -35,13 +23,17 @@ const VoneHome: React.FC = () => {
     } else {
     }
   };
+  const data = Loadmaterials_Vone().data;
+  const useTemplate = () => {
+    setTemplateAvailable(true);
+  };
   return (
     <div className="Main">
       {!istemplateavailable ? (
         <div>
           <h2 className="Title">Select Material</h2>
           <ul>
-            {Loadmaterials_Vone().data.map((val, key) => {
+            {data.map((val, key) => {
               return (
                 <a
                   key={key}
@@ -55,47 +47,27 @@ const VoneHome: React.FC = () => {
               );
             })}
           </ul>
-
           <div
             className="d-flex align-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
           >
-            {/* reuse action buttons from vone */}
-            <button
-              className="button"
+            <ActionButton
+              name="Blank Template"
+              disabled={false}
               onClick={() => {
-                blanktemplate();
+                setTemplateAvailable(true);
               }}
-            >
-              Blank Template
-            </button>
-            <button
+            />
+            <ActionButton
+              name="Use Template"
               disabled={!istemplateSelected}
-              className="button"
-              onClick={() => {
-                usetemplate(details);
-              }}
-            >
-              Use as Template
-            </button>
-            <button
+              onClick={useTemplate}
+            />
+            <ActionButton
+              name="Update"
               disabled={!istemplateSelected}
-              className="button"
-              onClick={() => {
-                updatetemplate(details);
-              }}
-            >
-              Update
-            </button>
-            <button
-              disabled={!istemplateSelected}
-              className="button"
-              onClick={() => {
-                deletetemplate(details);
-              }}
-            >
-              Delete
-            </button>
+              onClick={() => {}}
+            />
           </div>
         </div>
       ) : (
@@ -103,7 +75,7 @@ const VoneHome: React.FC = () => {
           <button onClick={() => setTemplateAvailable(false)}>
             Back to Templates
           </button>
-          <Form {...template}> </Form>
+          <Form inkName={details} />
         </div>
       )}
     </div>

@@ -1,17 +1,14 @@
+import FormNova from "./inkFormNova";
 import { useState } from "react";
-import { Loadmaterials_Nova } from "../Buttons/action";
-import {
-  blanktemplate,
-  usetemplate,
-  updatetemplate,
-  deletetemplate,
-} from "../Buttons/action";
+import { Loadmaterials_Nova } from "../Database/NovaMaterials";
+import ActionButton from "../Buttons/actionButtons";
 const initialTemplate = {
   inktype: "",
   name: "",
   pass_spacing: 0,
   dispense_height: 0,
 };
+
 const NovaHome: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
   const [istemplateSelected, setTemplateSelected] = useState(false);
@@ -58,42 +55,16 @@ const NovaHome: React.FC = () => {
             className="d-flex align-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
           >
-            {/* reuse action buttons from vone */}
-            <button
-              className="button"
+            <ActionButton
+              name="Blank Template"
+              disabled={false}
               onClick={() => {
-                blanktemplate();
+                setTemplateAvailable(true);
               }}
-            >
-              Blank Template
-            </button>
-            <button
-              disabled={!istemplateSelected}
-              className="button"
-              onClick={() => {
-                usetemplate(details);
-              }}
-            >
-              Use as Template
-            </button>
-            <button
-              disabled={!istemplateSelected}
-              className="button"
-              onClick={() => {
-                updatetemplate(details);
-              }}
-            >
-              Update
-            </button>
-            <button
-              disabled={!istemplateSelected}
-              className="button"
-              onClick={() => {
-                deletetemplate(details);
-              }}
-            >
-              Delete
-            </button>
+            />
+            <ActionButton name="Use Template" disabled={!istemplateSelected} />
+            <ActionButton name="Update" disabled={!istemplateSelected} />
+            <ActionButton name="Delete" disabled={!istemplateSelected} />
           </div>
         </div>
       ) : (
@@ -101,7 +72,7 @@ const NovaHome: React.FC = () => {
           <button onClick={() => setTemplateAvailable(false)}>
             Back to Templates
           </button>
-          {/* <Form {...template}> </Form> */}
+          <FormNova {...template}> </FormNova>
         </div>
       )}
     </div>

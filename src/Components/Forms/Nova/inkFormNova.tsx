@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import "./form.css";
+import "../form.css";
 interface profile {
   name?: string;
   inktype?: string;
@@ -9,7 +9,7 @@ interface profile {
   dispense_height?: Number;
 }
 
-const inkFormNova: React.FC<profile> = (props) => {
+const FormNova: React.FC<profile> = (props) => {
   const { handleSubmit, register } = useForm<profile>({
     defaultValues: {
       ...props,
@@ -78,4 +78,4 @@ const inkFormNova: React.FC<profile> = (props) => {
     </form>
   );
 };
-export default inkFormNova;
+export default FormNova;

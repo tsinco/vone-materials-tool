@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import download from "./download";
 import "../form.css";
+import { GetValues } from "../Database/VoneMaterials";
 interface profile {
   name?: string;
   inktype?: string;
@@ -8,11 +9,21 @@ interface profile {
   pass_spacing?: Number;
   dispense_height?: Number;
 }
-
-const Form: React.FC<profile> = (props) => {
+interface inkProps {
+  inkName: String;
+}
+const initialTemplate = {
+  inktype: "",
+  name: "",
+  pass_spacing: 0,
+  dispense_height: 0,
+};
+const Form: React.FC<inkProps> = (props) => {
+  const values = GetValues(props.inkName).data;
+  console.log(values);
   const { handleSubmit, register } = useForm<profile>({
     defaultValues: {
-      ...props,
+      ...initialTemplate,
     },
   });
   const onSubmit = handleSubmit((obj) => {

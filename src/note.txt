@@ -1,13 +1,40 @@
-- forgot password link
-- add Nova (reuse code from Vone if possible) 
-- read and write on Firebase
-- import UI components from Vone app (https://github.com/VolteraInc/concept-ink/tree/master/packages/ui/src)
-- database security
-- set loading icon on each request/call
-- 404 error
+To do list:
 
+--Vone
+    - Fetch Vone ink data from https://github.com/VolteraInc/ink-database
+    - Edit JSON data
+    - Update ink form for more fields
+--Nova
+    - different types of forms (ink, paste, substrate etc.)
+    - ask Chuy for a copy of Nova's database
+    - add, update , delete (Buttons)
 
--- use voltera ui buttons
--- zip file data from Vone
+--UI
+    - set loading icon on each request/call
+    - 404 error
+    - style buttons
+    - update side nav
+    - style display materials
+
+--Authentication
+    - forgot password link
+    - database security
+
 -- clean up code
-https://github.com/VolteraInc/acheron
+
+done:
+-- firebase authentication
+    -sign up
+    -log in
+    -google sign in
+    -log out
+-- Nova
+    - link firebase database
+    - display database
+    - ink form
+-- Vone
+    - ink form
+    - download form
+-- UI
+    - side nav
+    
