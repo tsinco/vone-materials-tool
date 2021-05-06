@@ -1,29 +1,32 @@
 import { useForm } from "react-hook-form";
 import download from "./download";
+import { useState, useEffect } from "react";
 import "../form.css";
-import { GetValues } from "../Database/VoneMaterials";
+import { GetInkProps } from "../Database/VoneMaterials";
+import Dispensing from "./Dispensing";
 interface profile {
-  name?: string;
-  inktype?: string;
+  name: string;
+  material?: string;
   expiration?: Date;
-  pass_spacing?: Number;
-  dispense_height?: Number;
+  probePitch?: Number;
+  trimLength?: Number;
+  tracePadPenetration?: Number;
 }
 interface inkProps {
   inkName: String;
 }
-const initialTemplate = {
-  inktype: "",
-  name: "",
-  pass_spacing: 0,
-  dispense_height: 0,
-};
+//add interface for GetInkProps
+
 const Form: React.FC<inkProps> = (props) => {
-  const values = GetValues(props.inkName).data;
-  console.log(values);
+  var Values = GetInkProps(props.inkName);
+  console.log(Values);
+
+  let initialTemplate = {
+    Values,
+  };
   const { handleSubmit, register } = useForm<profile>({
     defaultValues: {
-      ...initialTemplate,
+      // ...Values,
     },
   });
   const onSubmit = handleSubmit((obj) => {
@@ -37,9 +40,9 @@ const Form: React.FC<inkProps> = (props) => {
         <div>
           <h3>Details</h3>
 
-          <label htmlFor="inktype">Ink Type</label>
+          <label htmlFor="material">Ink Type</label>
           <input
-            name="inktype"
+            name="material"
             type="text"
             ref={register({ required: true })}
           />
@@ -53,43 +56,16 @@ const Form: React.FC<inkProps> = (props) => {
           />
         </div>
         <div>
-          <h3>Values</h3>
+          <h3>Settings</h3>
+          <h4>Probing</h4>
           <input
-            name="pass_spacing"
+            name="probePitch"
             type="number"
-            step="0.01"
+            step="1"
             ref={register({ required: true })}
           />
-          <label htmlFor="pass_spacing"> Pass Spacing</label>
-          <input
-            name="dispense_height"
-            type="number"
-            step="0.01"
-            ref={register({ required: true })}
-          />
-          <label htmlFor="dispense_height"> Dispense Height</label>
-
-          {/* <input
-          name="Anti-stringing-distance"
-          type="number"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="Anti-stringing-distance">Anti-stringing distance</label>
-        <input name="Kick" type="number" ref={register({ required: true })} />
-        <label htmlFor="Kick"> Kick</label>
-
-        <input
-          name="Feedrate"
-          type="number"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="Feedrate"> Feedrate</label>
-        <input
-          name="Trimlength"
-          type="number"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="Trimlength">Trim lenth</label> */}
+          <label htmlFor="probePitch">ProbePitch</label>
+          <Dispensing ref={register({ required: true })}></Dispensing>
         </div>
         <button type="submit">submit</button>
       </form>

@@ -1,3 +1,4 @@
+import { relative } from "path";
 import React, { useEffect, useState } from "react";
 import { db } from "../index";
 
@@ -24,3 +25,17 @@ export function Loadmaterials_Nova() {
     data,
   };
 }
+// export function GetInkProps(inkID: string) {
+//   const [data, setData] = useState([""]);
+//   const VoneCollection = db.collection("Vone").doc(inkID);
+
+//   useEffect(() => {
+//    VoneCollection.get().then((querySnapshot) => {
+//         querySnapshot.data((result) => {
+//        result.
+
+//   }, []);
+//   return {
+//     data,
+//   };
+// }

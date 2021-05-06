@@ -11,12 +11,11 @@ export function Loadmaterials_Vone() {
     async function fetchAPI() {
       try {
         let response = await fetch(inkurl);
-        response = await response.json();
-        const data = JSON.parse(JSON.stringify(response));
+        const data = await response.json();
 
+        console.log(data);
         for (let x = 0; x < DisplayLength; x++) {
           let name = data[x].name;
-          let downloadurl = data[x].download_url;
           setData((arr) => [...arr, name.replace(".json", "")]);
         }
       } catch {
@@ -29,25 +28,25 @@ export function Loadmaterials_Vone() {
     data,
   };
 }
-export function GetValues(inkName: String) {
-  const [data, setData] = useState([""]);
+export function GetInkProps(inkName: String) {
   const downloadurl =
     "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/" +
     inkName +
     ".json";
-  useEffect(() => {
-    async function fetchAPI() {
-      try {
-        let response = await fetch(downloadurl);
-        response = await response.json();
-        const data = JSON.parse(JSON.stringify(response));
-        setData(data);
-        // console.log(data);
-      } catch {
-        console.error();
-      }
+  let props: any;
+  async function fetchAPI() {
+    try {
+      let response = await fetch(downloadurl);
+      const data = await response.json();
+      props = data;
+      console.log(props);
+      return props;
+    } catch {
+      console.error();
     }
-    fetchAPI();
-  }, []);
-  return { data };
+  }
+  // fetchAPI();
+  console.log(fetchAPI());
+  // console.log("Fetch API");
+  // return props;
 }

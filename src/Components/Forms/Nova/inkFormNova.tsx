@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-
+// import { GetInkProps } from "../Database/NovaMaterials";
 import "../form.css";
 interface profile {
   name?: string;
@@ -8,74 +8,55 @@ interface profile {
   pass_spacing?: Number;
   dispense_height?: Number;
 }
-
-const FormNova: React.FC<profile> = (props) => {
+interface inkProps {
+  inkID: string;
+}
+const FormNova: React.FC<inkProps> = (props) => {
+  // const values = GetInkProps(props.inkID);
+  // console.log(values);
   const { handleSubmit, register } = useForm<profile>({
-    defaultValues: {
-      ...props,
-    },
+    defaultValues: {},
   });
   const onSubmit = handleSubmit((obj) => {
     const data = JSON.stringify(obj);
   });
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <h3>Details</h3>
+    <div className="Body">
+      <form onSubmit={onSubmit}>
+        <div>
+          <h3>Details</h3>
 
-        <label htmlFor="inktype">Ink Type</label>
-        <input name="inktype" type="text" ref={register({ required: true })} />
-        <label htmlFor="name"> Name</label>
-        <input name="name" type="text" ref={register({ required: true })} />
-        <label htmlFor="expiration"> Expiration Date: </label>
-        <input
-          name="expiration"
-          type="date"
-          ref={register({ required: true })}
-        />
-      </div>
-      <div>
-        <h3>Values</h3>
-        <input
-          name="pass_spacing"
-          type="number"
-          step="0.01"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="pass_spacing"> Pass Spacing</label>
-        <input
-          name="dispense_height"
-          type="number"
-          step="0.01"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="dispense_height"> Dispense Height</label>
-
-        {/* <input
-          name="Anti-stringing-distance"
-          type="number"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="Anti-stringing-distance">Anti-stringing distance</label>
-        <input name="Kick" type="number" ref={register({ required: true })} />
-        <label htmlFor="Kick"> Kick</label>
-
-        <input
-          name="Feedrate"
-          type="number"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="Feedrate"> Feedrate</label>
-        <input
-          name="Trimlength"
-          type="number"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="Trimlength">Trim lenth</label> */}
-      </div>
-      <button type="submit">submit</button>
-    </form>
+          <label htmlFor="material">Ink Type</label>
+          <input
+            name="material"
+            type="text"
+            ref={register({ required: true })}
+          />
+          <label htmlFor="name"> Name</label>
+          <input name="name" type="text" ref={register({ required: true })} />
+          <label htmlFor="expiration"> Expiration Date: </label>
+          <input
+            name="expiration"
+            type="date"
+            ref={register({ required: true })}
+          />
+        </div>
+        <div>
+          <h3>Settings</h3>
+          <h4>Probing</h4>
+          <input
+            name="probePitch"
+            type="number"
+            step="1"
+            ref={register({ required: true })}
+          />
+          <label htmlFor="probePitch">ProbePitch</label>
+          {/* <Dispensing ref={register({ required: true })}></Dispensing> */}
+        </div>
+        <button type="submit">submit</button>
+      </form>
+    </div>
   );
 };
 export default FormNova;

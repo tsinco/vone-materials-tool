@@ -1,15 +1,13 @@
-import Form from "./inkFormVone";
-// import Loading from "./loading";
+import FormNova from "./inkFormNova";
 import { useState } from "react";
-import { Loadmaterials_Vone } from "../Database/VoneMaterials";
+import { Loadmaterials_Nova } from "../Database/NovaMaterials";
 import ActionButton from "../Buttons/actionButtons";
 
-const VoneHome: React.FC = () => {
+const InkDisplay: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
   const [istemplateSelected, setTemplateSelected] = useState(false);
   const [details, setDetails] = useState("");
-  const data = Loadmaterials_Vone().data;
-
+  const data = Loadmaterials_Nova().data;
   const handleOnselect = (inkname: any) => {
     if (!istemplateSelected && details !== inkname) {
       setDetails(inkname);
@@ -36,7 +34,6 @@ const VoneHome: React.FC = () => {
     <div className="Main">
       {!istemplateavailable ? (
         <div>
-          <h2 className="Title">Select Material</h2>
           <ul>
             {data.map((val, key) => {
               return (
@@ -52,6 +49,7 @@ const VoneHome: React.FC = () => {
               );
             })}
           </ul>
+
           <div
             className="d-flex align-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
@@ -59,18 +57,17 @@ const VoneHome: React.FC = () => {
             <ActionButton
               name="Blank Template"
               disabled={false}
-              onClick={blankTemplate}
+              onClick={() => {
+                setTemplateAvailable(true);
+              }}
             />
             <ActionButton
               name="Use Template"
               disabled={!istemplateSelected}
               onClick={useTemplate}
             />
-            <ActionButton
-              name="Update"
-              disabled={!istemplateSelected}
-              onClick={() => {}}
-            />
+            <ActionButton name="Update" disabled={!istemplateSelected} />
+            <ActionButton name="Delete" disabled={!istemplateSelected} />
           </div>
         </div>
       ) : (
@@ -78,11 +75,11 @@ const VoneHome: React.FC = () => {
           <button onClick={() => setTemplateAvailable(false)}>
             Back to Templates
           </button>
-          <Form inkName={details} />
+          <FormNova inkID={details}> </FormNova>
         </div>
       )}
     </div>
   );
 };
 
-export default VoneHome;
+export default InkDisplay;
