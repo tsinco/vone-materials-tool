@@ -28,25 +28,25 @@ export function Loadmaterials_Vone() {
     data,
   };
 }
-export function GetInkProps(inkName: String) {
-  const downloadurl =
-    "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/" +
-    inkName +
-    ".json";
-  let props: any;
-  async function fetchAPI() {
-    try {
-      let response = await fetch(downloadurl);
-      const data = await response.json();
-      props = data;
-      console.log(props);
-      return props;
-    } catch {
-      console.error();
-    }
-  }
-  // fetchAPI();
-  console.log(fetchAPI());
-  // console.log("Fetch API");
-  // return props;
-}
+// export function GetInkProps(inkName: String) {
+//   const downloadurl =
+//     "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/" +
+//     inkName +
+//     ".json";
+//   let props: any;
+//   async function fetchAPI() {
+//     try {
+//       let response = await fetch(downloadurl);
+//       const data = await response.json();
+//       props = data;
+//       console.log(props);
+//       // return props;
+//     } catch {
+//       console.error();
+//     }
+//   }
+//   // fetchAPI();
+//   console.log(fetchAPI());
+//   // console.log("Fetch API");
+//   return props;
+// }

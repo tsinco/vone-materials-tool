@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import download from "./download";
 import { useState, useEffect } from "react";
 import "../form.css";
-import { GetInkProps } from "../Database/VoneMaterials";
+// import { GetInkProps } from "../Database/VoneMaterials";
 import Dispensing from "./Dispensing";
 interface profile {
   name: string;
@@ -18,17 +18,20 @@ interface inkProps {
 //add interface for GetInkProps
 
 const Form: React.FC<inkProps> = (props) => {
-  var Values = GetInkProps(props.inkName);
-  console.log(Values);
-
-  let initialTemplate = {
-    Values,
-  };
-  const { handleSubmit, register } = useForm<profile>({
-    defaultValues: {
-      // ...Values,
-    },
-  });
+  const { reset, handleSubmit, register } = useForm({});
+  const downloadurl =
+    "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/" +
+    props.inkName +
+    ".json";
+  useEffect(() => {
+    const Values = async () => {
+      let response = await fetch(downloadurl);
+      const data = await response.json();
+      console.log(data);
+      reset(data);
+    };
+    Values();
+  }, []);
   const onSubmit = handleSubmit((obj) => {
     const data = JSON.stringify(obj);
     download(data, "data.json", "text/plain");
@@ -48,24 +51,20 @@ const Form: React.FC<inkProps> = (props) => {
           />
           <label htmlFor="name"> Name</label>
           <input name="name" type="text" ref={register({ required: true })} />
-          <label htmlFor="expiration"> Expiration Date: </label>
-          <input
-            name="expiration"
-            type="date"
-            ref={register({ required: true })}
-          />
+          <label htmlFor="useBy"> Expiration Date: </label>
+          <input name="useBy" type="date" ref={register({ required: true })} />
         </div>
         <div>
           <h3>Settings</h3>
           <h4>Probing</h4>
           <input
-            name="probePitch"
+            name="settings.probing.probePitch.defaultValue"
             type="number"
             step="1"
             ref={register({ required: true })}
           />
           <label htmlFor="probePitch">ProbePitch</label>
-          <Dispensing ref={register({ required: true })}></Dispensing>
+          {/* <Dispensing ref={register({ required: true })}></Dispensing> */}
         </div>
         <button type="submit">submit</button>
       </form>
