@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@storybook/react": "^6.3.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
@@ -13,8 +14,11 @@
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
     "@types/react-router-dom": "^5.1.7",
+    "@volterainc/concept-ink": "^1.10.1",
     "@volterainc/ink-database": "^1.0.2",
     "@volterainc/service-reporting": "^2.2.3",
+    "@volterainc/service-translate": "^2.2.2",
+    "@volterainc/ui-ink": "^1.0.3",
     "@volterainc/utils-ink": "^1.0.2",
     "bootstrap": "^4.6.0",
     "firebase": "^8.2.4",
@@ -23,6 +27,7 @@
     "react-dom": "^17.0.1",
     "react-google-button": "^0.7.2",
     "react-hook-form": "^6.14.1",
+    "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "request-promise-native": "^1.0.9",
@@ -35,7 +40,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "emulate": "firebase emulators:start --import=./.firebase/emulator --export-on-exit"
+    "emulate": "firebase emulators:start --import=./.firebase/emulator --export-on-exit",
+    "storybook": "start-storybook -p 4000 -c .storybook"
   },
   "eslintConfig": {
     "extends": [

@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import download from "./download";
 import { useState, useEffect } from "react";
 import "../form.css";
+import { InkSettingsPanel } from "@volterainc/ui-ink";
+import { Ink } from "@volterainc/utils-ink";
 // import { GetInkProps } from "../Database/VoneMaterials";
 import Dispensing from "./Dispensing";
 interface profile {
@@ -13,12 +15,14 @@ interface profile {
   tracePadPenetration?: Number;
 }
 interface inkProps {
-  inkName: String;
+  inkName: string;
 }
+
 //add interface for GetInkProps
 
 const Form: React.FC<inkProps> = (props) => {
   const { reset, handleSubmit, register } = useForm({});
+  var ink: Ink[] = [];
   const downloadurl =
     "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/" +
     props.inkName +
@@ -29,6 +33,7 @@ const Form: React.FC<inkProps> = (props) => {
       const data = await response.json();
       console.log(data);
       reset(data);
+      ink = data + { isOverridingSettings: true };
     };
     Values();
   }, []);
@@ -65,6 +70,12 @@ const Form: React.FC<inkProps> = (props) => {
           />
           <label htmlFor="probePitch">ProbePitch</label>
           {/* <Dispensing ref={register({ required: true })}></Dispensing> */}
+
+          <InkSettingsPanel
+            inks={ink}
+            inkInUseId={props.inkName}
+            disabled={false}
+          />
         </div>
         <button type="submit">submit</button>
       </form>
