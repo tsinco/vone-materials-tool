@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import "../form.css";
 import { InkSettingsPanel } from "@volterainc/ui-ink";
 import { Ink } from "@volterainc/utils-ink";
+import AdorableAnchovy from "./template.test";
 // import { GetInkProps } from "../Database/VoneMaterials";
 import Dispensing from "./Dispensing";
 interface profile {
@@ -22,7 +23,10 @@ interface inkProps {
 
 const Form: React.FC<inkProps> = (props) => {
   const { reset, handleSubmit, register } = useForm({});
-  var ink: Ink[] = [];
+  //Change AdorableAnchovy to default state
+  const [newInk, setnewInk] = useState(AdorableAnchovy);
+
+  console.log(newInk);
   const downloadurl =
     "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/" +
     props.inkName +
@@ -31,9 +35,8 @@ const Form: React.FC<inkProps> = (props) => {
     const Values = async () => {
       let response = await fetch(downloadurl);
       const data = await response.json();
-      console.log(data);
       reset(data);
-      ink = data + { isOverridingSettings: true };
+      setnewInk(data);
     };
     Values();
   }, []);
@@ -61,18 +64,8 @@ const Form: React.FC<inkProps> = (props) => {
         </div>
         <div>
           <h3>Settings</h3>
-          <h4>Probing</h4>
-          <input
-            name="settings.probing.probePitch.defaultValue"
-            type="number"
-            step="1"
-            ref={register({ required: true })}
-          />
-          <label htmlFor="probePitch">ProbePitch</label>
-          {/* <Dispensing ref={register({ required: true })}></Dispensing> */}
-
           <InkSettingsPanel
-            inks={ink}
+            inks={[new Ink(newInk)]}
             inkInUseId={props.inkName}
             disabled={false}
           />
