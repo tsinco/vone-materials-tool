@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import download from "./download";
 import { useState, useEffect } from "react";
 import "../form.css";
-import { InkSettingsPanel } from "@volterainc/ui-ink";
-import { Ink } from "@volterainc/utils-ink";
+import { InkSettingsControl } from "@volterainc/ui-ink";
+import { Ink, alterInk } from "@volterainc/utils-ink";
 import AdorableAnchovy from "./template.test";
+import { getConstantValue } from "typescript";
 // import { GetInkProps } from "../Database/VoneMaterials";
-import Dispensing from "./Dispensing";
 interface profile {
   name: string;
   material?: string;
@@ -22,10 +22,10 @@ interface inkProps {
 //add interface for GetInkProps
 
 const Form: React.FC<inkProps> = (props) => {
-  const { reset, handleSubmit, register } = useForm({});
+  const { reset, handleSubmit, register, getValues } = useForm({});
+  const [name, setName] = useState("");
   //Change AdorableAnchovy to default state
-  const [newInk, setnewInk] = useState(AdorableAnchovy);
-
+  const [newInk, setnewInk] = useState(new Ink(AdorableAnchovy));
   console.log(newInk);
   const downloadurl =
     "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/" +
@@ -36,7 +36,7 @@ const Form: React.FC<inkProps> = (props) => {
       let response = await fetch(downloadurl);
       const data = await response.json();
       reset(data);
-      setnewInk(data);
+      setnewInk(new Ink(data));
     };
     Values();
   }, []);
@@ -44,6 +44,10 @@ const Form: React.FC<inkProps> = (props) => {
     const data = JSON.stringify(obj);
     download(data, "data.json", "text/plain");
   });
+  const handleOnchange = (ink: Ink, path: string, value: number | string) => {
+    setnewInk(alterInk(ink, path, value));
+    console.log(ink, path, value);
+  };
 
   return (
     <div className="Body">
@@ -58,16 +62,35 @@ const Form: React.FC<inkProps> = (props) => {
             ref={register({ required: true })}
           />
           <label htmlFor="name"> Name</label>
-          <input name="name" type="text" ref={register({ required: true })} />
+          <input
+            name="name"
+            type="text"
+            ref={register({ required: true })}
+            onChange={(e) => handleOnchange(newInk, "name", e.target.value)}
+          />
+          <label htmlFor="description">Description</label>
+          <input
+            name="description"
+            type="text"
+            ref={register({ required: true })}
+            onChange={(e) =>
+              handleOnchange(newInk, "description", e.target.value)
+            }
+          />
           <label htmlFor="useBy"> Expiration Date: </label>
-          <input name="useBy" type="date" ref={register({ required: true })} />
+          <input
+            name="useBy"
+            type="date"
+            ref={register({ required: true })}
+            onChange={(e) => handleOnchange(newInk, "useBy", e.target.value)}
+          />
         </div>
         <div>
           <h3>Settings</h3>
-          <InkSettingsPanel
-            inks={[new Ink(newInk)]}
-            inkInUseId={props.inkName}
+          <InkSettingsControl
+            ink={newInk}
             disabled={false}
+            onChange={handleOnchange}
           />
         </div>
         <button type="submit">submit</button>
