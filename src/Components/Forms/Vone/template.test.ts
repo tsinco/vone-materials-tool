@@ -1,16 +1,15 @@
-const AdorableAnchovy = {
-  id: "Voltera/AdorableAnchovy",
-  type: "Flexible Conductive Ink",
-  name: "AdorableAnchovy",
-  organization: "Voltera",
-  useBy: "2021-12-14",
-  storage: "4°C – 10°C",
-  material: "Flex 2",
-  description:
-    "\n   Flexible conductive ink for Kapton (polyimide), polycarbonate and PET.\n   Solder joints will be brittle, use adhesive or epoxy to secure components.\n ",
+const defaultValue = {
+  id: "",
+  type: "",
+  name: "",
+  organization: "",
+  useBy: "",
+  storage: "",
+  material: "",
+  description: "",
   label: {
-    type: "FLEX CONDUCTOR",
-    color: "#c10000",
+    type: "",
+    color: "",
   },
   heatingProfile: [
     {
@@ -95,4 +94,4 @@ const AdorableAnchovy = {
     },
   },
 };
-export default AdorableAnchovy;
+export default defaultValue;

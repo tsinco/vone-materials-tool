@@ -3,50 +3,59 @@ import download from "./download";
 import { useState, useEffect } from "react";
 import "../form.css";
 import { InkSettingsControl } from "@volterainc/ui-ink";
-import { Ink, alterInk } from "@volterainc/utils-ink";
-import AdorableAnchovy from "./template.test";
-import { getConstantValue } from "typescript";
-// import { GetInkProps } from "../Database/VoneMaterials";
-interface profile {
-  name: string;
-  material?: string;
-  expiration?: Date;
-  probePitch?: Number;
-  trimLength?: Number;
-  tracePadPenetration?: Number;
-}
+import { Ink, alterInk, alterSetting } from "@volterainc/utils-ink";
+import defaultValue from "./template.test";
+
 interface inkProps {
   inkName: string;
 }
+const url = {
+  ink: "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/",
+  paste:
+    "https://raw.githubusercontent.com/VolteraInc/ink-database/master/pastes/",
+};
+// trying to get rid of the "otional values" in settings
+function newSettings(ink: Ink) {
+  const probe = [ink.settings.probing];
+  const dispense = [ink.settings.dispense];
 
-//add interface for GetInkProps
-
+  for (let x = 0; x < probe.length; x++) {
+    if (probe[x].defaultValue !== probe[x].value) {
+      probe[x].defaultValue = probe[x].value;
+    } else {
+    }
+  }
+  for (let x = 0; x < dispense.length; x++) {
+    if (probe[x].defaultValue !== probe[x].value) {
+      probe[x].defaultValue = probe[x].value;
+    } else {
+    }
+  }
+  console.log(probe);
+  return ink;
+}
 const Form: React.FC<inkProps> = (props) => {
-  const { reset, handleSubmit, register, getValues } = useForm({});
-  const [name, setName] = useState("");
-  //Change AdorableAnchovy to default state
-  const [newInk, setnewInk] = useState(new Ink(AdorableAnchovy));
-  console.log(newInk);
-  const downloadurl =
-    "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/" +
-    props.inkName +
-    ".json";
+  const { reset, handleSubmit, register } = useForm({});
+  const [newInk, setnewInk] = useState(new Ink(defaultValue));
   useEffect(() => {
-    const Values = async () => {
+    const downloadurl = url.ink + props.inkName + ".json";
+    const getInk = async () => {
       let response = await fetch(downloadurl);
       const data = await response.json();
       reset(data);
       setnewInk(new Ink(data));
     };
-    Values();
+    getInk();
   }, []);
-  const onSubmit = handleSubmit((obj) => {
-    const data = JSON.stringify(obj);
-    download(data, "data.json", "text/plain");
+
+  const onSubmit = handleSubmit(() => {
+    // const hydrated = Object.assign(defaultValue);
+    console.log(newSettings(newInk));
+    const data = JSON.stringify(newInk);
+    download(data, newInk.name + ".json", "text/plain");
   });
   const handleOnchange = (ink: Ink, path: string, value: number | string) => {
     setnewInk(alterInk(ink, path, value));
-    console.log(ink, path, value);
   };
 
   return (
@@ -60,6 +69,7 @@ const Form: React.FC<inkProps> = (props) => {
             name="material"
             type="text"
             ref={register({ required: true })}
+            disabled={true}
           />
           <label htmlFor="name"> Name</label>
           <input
@@ -93,7 +103,7 @@ const Form: React.FC<inkProps> = (props) => {
             onChange={handleOnchange}
           />
         </div>
-        <button type="submit">submit</button>
+        <button type="submit">Download</button>
       </form>
     </div>
   );
