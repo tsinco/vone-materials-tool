@@ -3,9 +3,9 @@ import download from "./download";
 import { useState, useEffect } from "react";
 import "../form.css";
 import { InkSettingsControl } from "@volterainc/ui-ink";
-import { Ink, alterInk, alterSetting } from "@volterainc/utils-ink";
+import { Ink, alterInk } from "@volterainc/utils-ink";
 import defaultValue from "./template.test";
-
+import { Hydrate, Dehydrate } from "./hydration";
 interface inkProps {
   inkName: string;
 }
@@ -15,25 +15,6 @@ const url = {
     "https://raw.githubusercontent.com/VolteraInc/ink-database/master/pastes/",
 };
 // trying to get rid of the "otional values" in settings
-function newSettings(ink: Ink) {
-  const probe = [ink.settings.probing];
-  const dispense = [ink.settings.dispense];
-
-  for (let x = 0; x < probe.length; x++) {
-    if (probe[x].defaultValue !== probe[x].value) {
-      probe[x].defaultValue = probe[x].value;
-    } else {
-    }
-  }
-  for (let x = 0; x < dispense.length; x++) {
-    if (probe[x].defaultValue !== probe[x].value) {
-      probe[x].defaultValue = probe[x].value;
-    } else {
-    }
-  }
-  console.log(probe);
-  return ink;
-}
 const Form: React.FC<inkProps> = (props) => {
   const { reset, handleSubmit, register } = useForm({});
   const [newInk, setnewInk] = useState(new Ink(defaultValue));
@@ -49,9 +30,8 @@ const Form: React.FC<inkProps> = (props) => {
   }, []);
 
   const onSubmit = handleSubmit(() => {
-    // const hydrated = Object.assign(defaultValue);
-    console.log(newSettings(newInk));
-    const data = JSON.stringify(newInk);
+    const formattedInk = Hydrate(Dehydrate(newInk));
+    const data = JSON.stringify(formattedInk);
     download(data, newInk.name + ".json", "text/plain");
   });
   const handleOnchange = (ink: Ink, path: string, value: number | string) => {
@@ -62,7 +42,7 @@ const Form: React.FC<inkProps> = (props) => {
     <div className="Body">
       <form onSubmit={onSubmit}>
         <div>
-          <h3>Details</h3>
+          <h2>Details</h2>
 
           <label htmlFor="material">Ink Type</label>
           <input

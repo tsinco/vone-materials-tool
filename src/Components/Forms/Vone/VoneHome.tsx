@@ -1,5 +1,5 @@
 import Form from "./inkFormVone";
-// import Loading from "./loading";
+import "./VoneHome.css";
 import { useState } from "react";
 import { Loadmaterials_Vone } from "../Database/VoneMaterials";
 import ActionButton from "../Buttons/actionButtons";
@@ -35,7 +35,7 @@ const VoneHome: React.FC = () => {
   return (
     <div className="Main">
       {!istemplateavailable ? (
-        <div>
+        <div className="body">
           <h2 className="Title">Select Material</h2>
           <ul>
             {data.map((val, key) => {

@@ -14,6 +14,7 @@
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
     "@types/react-router-dom": "^5.1.7",
+    "@volterainc/app-resources": "^1.0.5",
     "@volterainc/concept-ink": "^1.10.1",
     "@volterainc/ink-database": "^1.0.2",
     "@volterainc/service-reporting": "^2.2.3",
@@ -22,6 +23,7 @@
     "@volterainc/utils-ink": "^1.0.2",
     "bootstrap": "^4.6.0",
     "firebase": "^8.2.4",
+    "lodash": "^4.17.21",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
@@ -62,6 +64,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.171",
     "@types/request-promise-native": "^1.0.17"
   }
 }

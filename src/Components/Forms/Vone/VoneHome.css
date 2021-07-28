@@ -1,0 +1,33 @@
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.app {
+  animation: fadein 0.5s;
+}
+.body {
+  position: relative;
+  color: white;
+  height: 100vh;
+  background-color: #313131;
+  background-image: url(~@volterainc/app-resources/images/grid.png);
+  font-family: "Roboto", sans-serif;
+  overflow: fixed;
+  margin: 0px;
+  /*NOTE - Decrease from 150px or remove entirely if performance issues encontered */
+  box-shadow: inset 0px 0px 150px rgba(0, 0, 0, 0.4);
+}
+h2 {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+p {
+  font-size: 16px;
+}

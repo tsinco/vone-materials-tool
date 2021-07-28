@@ -32,7 +32,7 @@ const Home: React.FC = () => {
       </div>
       {!selected ? (
         <div className="Main">
-          <h2 className="Title">Select Platform</h2>
+          <h1 className="Title">Select Platform</h1>
           <div className="Body" style={{ minHeight: "50vh" }}>
             <a onClick={handleOnclick("Vone")}>Vone</a>
             <a onClick={handleOnclick("Nova")}>Nova</a>
