@@ -5,7 +5,7 @@ import "../form.css";
 import { InkSettingsControl } from "@volterainc/ui-ink";
 import { Ink, alterInk } from "@volterainc/utils-ink";
 import defaultValue from "./template.test";
-import { Hydrate, Dehydrate } from "./hydration";
+import { createInkDefinition } from "./hydration";
 interface inkProps {
   inkName: string;
 }
@@ -14,28 +14,27 @@ const url = {
   paste:
     "https://raw.githubusercontent.com/VolteraInc/ink-database/master/pastes/",
 };
-// trying to get rid of the "otional values" in settings
 const Form: React.FC<inkProps> = (props) => {
   const { reset, handleSubmit, register } = useForm({});
-  const [newInk, setnewInk] = useState(new Ink(defaultValue));
+  const [newInk, setNewInk] = useState(new Ink(defaultValue));
   useEffect(() => {
     const downloadurl = url.ink + props.inkName + ".json";
     const getInk = async () => {
       let response = await fetch(downloadurl);
       const data = await response.json();
       reset(data);
-      setnewInk(new Ink(data));
+      setNewInk(new Ink(data));
     };
     getInk();
   }, []);
 
   const onSubmit = handleSubmit(() => {
-    const formattedInk = Hydrate(Dehydrate(newInk));
+    const formattedInk = createInkDefinition(newInk);
     const data = JSON.stringify(formattedInk);
     download(data, newInk.name + ".json", "text/plain");
   });
-  const handleOnchange = (ink: Ink, path: string, value: number | string) => {
-    setnewInk(alterInk(ink, path, value));
+  const handleOnChange = (ink: Ink, path: string, value: number | string) => {
+    setNewInk(alterInk(ink, path, value));
   };
 
   return (
@@ -56,7 +55,7 @@ const Form: React.FC<inkProps> = (props) => {
             name="name"
             type="text"
             ref={register({ required: true })}
-            onChange={(e) => handleOnchange(newInk, "name", e.target.value)}
+            onChange={(e) => handleOnChange(newInk, "name", e.target.value)}
           />
           <label htmlFor="description">Description</label>
           <input
@@ -64,7 +63,7 @@ const Form: React.FC<inkProps> = (props) => {
             type="text"
             ref={register({ required: true })}
             onChange={(e) =>
-              handleOnchange(newInk, "description", e.target.value)
+              handleOnChange(newInk, "description", e.target.value)
             }
           />
           <label htmlFor="useBy"> Expiration Date: </label>
@@ -72,7 +71,7 @@ const Form: React.FC<inkProps> = (props) => {
             name="useBy"
             type="date"
             ref={register({ required: true })}
-            onChange={(e) => handleOnchange(newInk, "useBy", e.target.value)}
+            onChange={(e) => handleOnChange(newInk, "useBy", e.target.value)}
           />
         </div>
         <div>
@@ -80,7 +79,7 @@ const Form: React.FC<inkProps> = (props) => {
           <InkSettingsControl
             ink={newInk}
             disabled={false}
-            onChange={handleOnchange}
+            onChange={handleOnChange}
           />
         </div>
         <button type="submit">Download</button>
