@@ -3,7 +3,7 @@ import download from "./download";
 import { useState, useEffect } from "react";
 import "../form.css";
 import { InkSettingsControl } from "@volterainc/ui-ink";
-import { Ink, alterInk } from "@volterainc/utils-ink";
+import { standardOrder, Ink, alterInk } from "@volterainc/utils-ink";
 import defaultValue from "./template.test";
 import { createInkDefinition } from "./hydration";
 interface inkProps {

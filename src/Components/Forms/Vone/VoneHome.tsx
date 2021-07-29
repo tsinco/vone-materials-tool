@@ -8,8 +8,8 @@ const VoneHome: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
   const [istemplateSelected, setTemplateSelected] = useState(false);
   const [details, setDetails] = useState("");
-  const data = Loadmaterials_Vone().data;
-
+  const data = Loadmaterials_Vone();
+  console.log(data);
   const handleOnselect = (inkname: any) => {
     if (!istemplateSelected && details !== inkname) {
       setDetails(inkname);
@@ -47,7 +47,7 @@ const VoneHome: React.FC = () => {
                     handleOnselect(val);
                   }}
                 >
-                  <div id="name">{val}</div>
+                  <div id="name">{key}</div>
                 </a>
               );
             })}
