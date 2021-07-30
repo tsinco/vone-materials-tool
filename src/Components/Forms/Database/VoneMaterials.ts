@@ -45,26 +45,30 @@ async function fetchInk(inkAddress: string) {
 }
 
 export function Loadmaterials_Vone() {
-  const inkurl =
-    " https://api.github.com/repos/VolteraInc/ink-database/contents/inks";
-  const pasteurl =
-    " https://api.github.com/repos/VolteraInc/ink-database/contents/pastes";
-  var inkObj: Ink[] = [];
-  async function fetchAPI() {
-    try {
-      let response = await fetch(inkurl);
-      const dbObj = await response.json();
+  const [data, setData] = useState([]);
+  // const inkurl =
+  //   " https://api.github.com/repos/VolteraInc/ink-database/contents/inks";
+  // const pasteurl =
+  //   " https://api.github.com/repos/VolteraInc/ink-database/contents/pastes";
+  let inkObj: any = [];
 
-      for (let x = 0; x < dbObj.length; x++) {
-        inkObj.push(new Ink(await fetchInk(dbObj[x].download_url)));
+  useEffect(() => {
+    async function fetchAPI() {
+      const inkurl =
+        " https://api.github.com/repos/VolteraInc/ink-database/contents/inks";
+      try {
+        let response = await fetch(inkurl);
+        const dbObj = await response.json();
+
+        for (let x = 0; x < dbObj.length; x++) {
+          inkObj.push(await fetchInk(dbObj[x].download_url));
+        }
+        setData(inkObj);
+      } catch {
+        console.error();
       }
-    } catch {
-      console.error();
     }
-    console.log(standardOrder(inkObj));
-  }
-  fetchAPI();
-  // console.log(inkObj);
-  // console.log(standardOrder(inkObj));
-  return inkObj;
+    fetchAPI();
+  }, []);
+  return data;
 }

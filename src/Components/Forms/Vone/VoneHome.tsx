@@ -3,13 +3,14 @@ import "./VoneHome.css";
 import { useState } from "react";
 import { Loadmaterials_Vone } from "../Database/VoneMaterials";
 import ActionButton from "../Buttons/actionButtons";
+import { standardOrder } from "@volterainc/utils-ink";
 
 const VoneHome: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
   const [istemplateSelected, setTemplateSelected] = useState(false);
   const [details, setDetails] = useState("");
   const data = Loadmaterials_Vone();
-  console.log(data);
+  console.log(standardOrder(data));
   const handleOnselect = (inkname: any) => {
     if (!istemplateSelected && details !== inkname) {
       setDetails(inkname);
@@ -38,23 +39,37 @@ const VoneHome: React.FC = () => {
         <div className="body">
           <h2 className="Title">Select Material</h2>
           <ul>
-            {data.map((val, key) => {
-              return (
-                <a
-                  key={key}
-                  className="row"
-                  onClick={() => {
-                    handleOnselect(val);
-                  }}
-                >
-                  <div id="name">{key}</div>
-                </a>
-              );
-            })}
+            <div className="list-inks">
+              {standardOrder(data)
+                .slice(0, 2)
+                .map((typeInks) => {
+                  const type = typeInks[0].type;
+                  return (
+                    <div key={type} className="ink-selection-list">
+                      <div className="type">
+                        <h4>{type}</h4>
+                      </div>
+                      {typeInks.slice(0, 5).map((inks) => {
+                        return (
+                          <a
+                            key={inks.id}
+                            className="row"
+                            onClick={() => {
+                              handleOnselect(inks.name);
+                            }}
+                          >
+                            <div id="name">{inks.name}</div>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+            </div>
           </ul>
           <div
             className="d-flex align-items-center justify-content-center"
-            style={{ minHeight: "100vh" }}
+            style={{ minHeight: "50vh" }}
           >
             <ActionButton
               name="Blank Template"
@@ -65,11 +80,6 @@ const VoneHome: React.FC = () => {
               name="Use Template"
               disabled={!istemplateSelected}
               onClick={useTemplate}
-            />
-            <ActionButton
-              name="Update"
-              disabled={!istemplateSelected}
-              onClick={() => {}}
             />
           </div>
         </div>

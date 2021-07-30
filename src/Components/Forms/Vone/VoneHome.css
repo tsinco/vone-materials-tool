@@ -31,3 +31,29 @@ h2 {
 p {
   font-size: 16px;
 }
+.list-inks {
+  display: flex;
+  flex-direction: row;
+}
+.list-inks .ink-selection-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 20px;
+}
+.list-inks .ink-selection-list .type {
+  font-size: 20px;
+}
+.list-inks .ink-selection-list .list {
+  padding: 0px 10px;
+  height: auto;
+  max-height: 400px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: background-color 0.2s ease-in-out, max-height 0.6s ease-in-out;
+}
+.list-inks .ink-selection-list .list.expanded {
+  overflow-y: auto;
+  max-height: 500px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
