@@ -4,41 +4,39 @@ import { useState } from "react";
 import NovaHome from "./Forms/Nova/NovaHome";
 import VoneHome from "./Forms/Vone/VoneHome";
 import Sidebar from "./SideNav/Sidebar";
+import { JumboButton } from "@volterainc/ui-core";
+
 const Home: React.FC = () => {
-  const [selected, setSelected] = useState(false);
-  const [nova, setNova] = useState(false);
-  const [vone, setVone] = useState(false);
-  const handleOnclick = (Type: string) => (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    console.log(Type);
-    setSelected(true);
+  const [platform, setPlatform] = useState("");
+  const handleOnclick = (Type: string) => {
     if (Type === "Nova") {
-      setNova(true);
+      setPlatform("Nova");
+    }
+    if (Type === "Vone") {
+      setPlatform("Vone");
     } else {
-      setVone(true);
     }
   };
+
   const BacktoPlatform = () => {
-    setSelected(false);
-    setNova(false);
-    setVone(false);
+    setPlatform("");
   };
+
   return (
     <div className="grid-container">
       <Sidebar />
       <div className="Back">
         <a onClick={BacktoPlatform}>{"<<Back"}</a>
       </div>
-      {!selected ? (
+      {platform === "" ? (
         <div className="Main">
           <h1 className="Title">Select Platform</h1>
-          <div className="Body" style={{ minHeight: "50vh" }}>
-            <a onClick={handleOnclick("Vone")}>Vone</a>
-            <a onClick={handleOnclick("Nova")}>Nova</a>
+          <div className="Body" style={{ minHeight: "100vh" }}>
+            <JumboButton text="Vone" onClick={() => handleOnclick("Vone")} />
+            <JumboButton text="Nova" onClick={() => handleOnclick("Nova")} />
           </div>
         </div>
-      ) : nova ? (
+      ) : platform === "Nova" ? (
         <NovaHome />
       ) : (
         <VoneHome />
