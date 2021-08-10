@@ -3,16 +3,17 @@ import "./VoneHome.css";
 import { useState } from "react";
 import ActionButton from "../Buttons/actionButtons";
 import DisplayMaterials from "../Database/VoneMaterials";
-
+import { Ink } from "@volterainc/utils-ink";
+import defaultValue from "./template.test";
 const VoneHome: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
-  const [selectedInk, setSelectedInk] = useState("");
+  const [selectedInk, setSelectedInk] = useState(new Ink(defaultValue));
 
   const useTemplate = () => {
     setTemplateAvailable(true);
   };
   const blankTemplate = () => {
-    setSelectedInk("");
+    setSelectedInk(new Ink(defaultValue));
     setTemplateAvailable(true);
   };
 
@@ -23,9 +24,8 @@ const VoneHome: React.FC = () => {
           <h2 className="Title">Select Material</h2>
 
           <DisplayMaterials
-            parentCallback={(inkName: string) => setSelectedInk(inkName)}
+            parentCallback={(ink: any) => setSelectedInk(new Ink(ink))}
           />
-
           <div
             className="d-flex align-items-center justify-content-center"
             style={{ minHeight: "50vh" }}
@@ -37,7 +37,7 @@ const VoneHome: React.FC = () => {
             />
             <ActionButton
               name="Use Template"
-              disabled={selectedInk.length === 0}
+              disabled={selectedInk.name === ""}
               onClick={useTemplate}
             />
           </div>
@@ -45,7 +45,7 @@ const VoneHome: React.FC = () => {
       ) : (
         <div>
           <a onClick={() => setTemplateAvailable(false)}>Back to Templates</a>
-          <Form inkName={selectedInk} />
+          <Form ink={selectedInk} />
         </div>
       )}
     </div>

@@ -3,31 +3,19 @@ import download from "./download";
 import { useState, useEffect } from "react";
 import "../form.css";
 import { InkSettingsControl } from "@volterainc/ui-ink";
-import { standardOrder, Ink, alterInk } from "@volterainc/utils-ink";
+import { Ink, alterInk } from "@volterainc/utils-ink";
 import defaultValue from "./template.test";
 import { createInkDefinition } from "./hydration";
 interface inkProps {
-  inkName: string;
+  ink: Ink;
 }
-const url = {
-  ink: "https://raw.githubusercontent.com/VolteraInc/ink-database/master/inks/",
-  paste:
-    "https://raw.githubusercontent.com/VolteraInc/ink-database/master/pastes/",
-};
 const Form: React.FC<inkProps> = (props) => {
   const { reset, handleSubmit, register } = useForm({});
   const [newInk, setNewInk] = useState(new Ink(defaultValue));
   useEffect(() => {
-    const downloadurl = url.ink + props.inkName + ".json";
-    const getInk = async () => {
-      let response = await fetch(downloadurl);
-      const data = await response.json();
-      reset(data);
-      setNewInk(new Ink(data));
-    };
-    getInk();
+    reset(props.ink);
+    setNewInk(props.ink);
   }, []);
-
   const onSubmit = handleSubmit(() => {
     const formattedInk = createInkDefinition(newInk);
     const data = JSON.stringify(formattedInk);
@@ -43,9 +31,9 @@ const Form: React.FC<inkProps> = (props) => {
         <div>
           <h2>Details</h2>
 
-          <label htmlFor="material">Ink Type</label>
+          <label htmlFor="type">Ink Type</label>
           <input
-            name="material"
+            name="type"
             type="text"
             ref={register({ required: true })}
             disabled={true}

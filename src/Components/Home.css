@@ -19,22 +19,28 @@ a:visited {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 0.5fr 1.5fr 1fr 1fr;
-  grid-template-rows: 0.2fr 0.3fr 2.5fr 1fr;
+  grid-template-columns: 10% 90%;
+  grid-template-rows: 145% 4.5%;
   gap: 0px 0px;
+  grid-template-areas:
+    "Back"
+    "Main";
 }
 .Back {
-  grid-area: 1 / 2 / 2 / 3;
+  grid-area: Back;
+  display: flex;
 }
 .Main {
-  grid-area: 2 / 2 / 5 / 5;
+  grid-area: 90% 90%;
   position: relative;
   color: white;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   background-color: #313131;
   background-image: url(~@volterainc/app-resources/images/grid.png);
+  background-size: auto;
   font-family: "Roboto", sans-serif;
-  overflow: fixed;
+  overflow: hidden;
   margin: 0px;
   /*NOTE - Decrease from 150px or remove entirely if performance issues encontered */
   box-shadow: inset 0px 0px 150px rgba(0, 0, 0, 0.4);
@@ -50,7 +56,7 @@ a:visited {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: fit-content;
+  height: auto;
   overflow: hidden;
   margin: 0px;
 }

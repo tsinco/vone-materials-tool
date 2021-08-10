@@ -1,12 +1,13 @@
 .Sidebar {
   height: 100%;
-  width: 250px;
+  width: 10%;
   position: fixed;
   background-color: #555555;
   z-index: 1;
   top: 0;
   left: 0;
 }
+
 .SidebarList {
   height: auto;
   padding: 0;
@@ -24,6 +25,7 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+
 .SidebarList .row:hover {
   cursor: pointer;
   background-color: #797777;

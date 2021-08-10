@@ -16,14 +16,15 @@ const Sidebar: React.FC = () => {
                 window.location.pathname = val.link;
               }}
             >
-              {""}
               <div id="icon">{val.icon}</div>
               <div id="title">{val.title}</div>
             </li>
           );
         })}
+        <div className="logout">
+          <Logout icon="icon" title="title" />
+        </div>
       </ul>
-      <Logout />
     </div>
   );
 };
