@@ -1,5 +1,4 @@
 import Form from "./inkFormVone";
-import "./VoneHome.css";
 import { useState } from "react";
 import ActionButton from "../Buttons/actionButtons";
 import DisplayMaterials from "../Database/VoneMaterials";
@@ -20,16 +19,14 @@ const VoneHome: React.FC = () => {
   return (
     <div className="Main">
       {!istemplateavailable ? (
-        <div className="body">
-          <h2 className="Title">Select Material</h2>
-
-          <DisplayMaterials
-            parentCallback={(ink: any) => setSelectedInk(new Ink(ink))}
-          />
-          <div
-            className="d-flex align-items-center justify-content-center"
-            style={{ minHeight: "50vh" }}
-          >
+        <div>
+          <h1>Select Material</h1>
+          <div className="Body">
+            <DisplayMaterials
+              parentCallback={(ink: any) => setSelectedInk(new Ink(ink))}
+            />
+          </div>
+          <div className="ActionButtons">
             <ActionButton
               name="Blank Template"
               disabled={false}

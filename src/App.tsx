@@ -13,10 +13,7 @@ function App() {
         <Switch>
           <React.Fragment>
             <PrivateRoute exact path="/" component={Home}></PrivateRoute>
-            <Container
-              className="d-flex align-items-center justify-content-center"
-              style={{ minHeight: "100vh" }}
-            >
+            <Container>
               <Route exact path="/login" component={Login}></Route>
               <Route exact path="/signup" component={Signup}></Route>
             </Container>

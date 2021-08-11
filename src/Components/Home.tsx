@@ -30,8 +30,8 @@ const Home: React.FC = () => {
       </div>
       {platform === "" ? (
         <div className="Main">
-          <h1 className="Title">Select Platform</h1>
-          <div className="Body" style={{ minHeight: "100vh" }}>
+          <h1>Select Platform</h1>
+          <div className="ActionButtons">
             <JumboButton text="Vone" onClick={() => handleOnclick("Vone")} />
             <JumboButton text="Nova" onClick={() => handleOnclick("Nova")} />
           </div>

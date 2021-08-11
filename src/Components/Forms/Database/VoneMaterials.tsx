@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { standardOrder, Ink } from "@volterainc/utils-ink";
 import { Spinner } from "@volterainc/ui-core";
-
+import { SelectInkButton } from "@volterainc/ui-ink";
 const API = {
   ink: " https://api.github.com/repos/VolteraInc/ink-database/contents/inks",
   paste:
@@ -50,7 +50,11 @@ export function FetchMaterials_Vone() {
 
 const DisplayMaterials = ({ parentCallback }: any) => {
   const data = FetchMaterials_Vone();
-
+  const [isSelected, setIselected] = useState(false);
+  const handleOnclick = (selectedInk: any) => {
+    parentCallback(selectedInk);
+    setIselected(true);
+  };
   return (
     <ul>
       {data.length === 0 ? (
@@ -66,13 +70,15 @@ const DisplayMaterials = ({ parentCallback }: any) => {
                 </div>
                 {typeInks.slice(0, displayLength).map((inks) => {
                   return (
-                    <a
+                    // Add Select Ink button
+                    <SelectInkButton
                       key={inks.id}
-                      className="row"
-                      onClick={() => parentCallback(inks)}
-                    >
-                      <div id="name">{inks.name}</div>
-                    </a>
+                      ink={new Ink(inks)}
+                      disabled={false}
+                      checked={isSelected}
+                      indicator={"check"}
+                      onClick={() => handleOnclick(inks)}
+                    />
                   );
                 })}
               </div>

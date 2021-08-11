@@ -19,23 +19,25 @@ a:visited {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 10% 90%;
-  grid-template-rows: 145% 4.5%;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 0.2fr 1.8fr;
+  grid-template-rows: 0.2fr 5fr;
   gap: 0px 0px;
   grid-template-areas:
-    "Back"
-    "Main";
+    "Logo Back"
+    "Sidebar Main";
 }
 .Back {
   grid-area: Back;
-  display: flex;
+  background-color: #313131;
 }
 .Main {
-  grid-area: 90% 90%;
+  grid-area: Main;
   position: relative;
   color: white;
-  height: 100%;
-  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  text-align: center;
   background-color: #313131;
   background-image: url(~@volterainc/app-resources/images/grid.png);
   background-size: auto;
@@ -45,24 +47,26 @@ a:visited {
   /*NOTE - Decrease from 150px or remove entirely if performance issues encontered */
   box-shadow: inset 0px 0px 150px rgba(0, 0, 0, 0.4);
 }
-.Title {
-  grid-area: 2 / 3 / 3 / 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+h1 {
+  /* width: 500px; */
+  padding-top: 50px;
+  margin: 0 auto;
+  /* text-align: center; */
 }
-.Body {
-  grid-area: 3 / 2 / 5 / 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: auto;
-  overflow: hidden;
-  margin: 0px;
-}
+
 .button:disabled,
 button[disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
+}
+.Main .ActionButtons {
+  position: relative;
+  padding-top: 100px;
+  margin: 0 auto;
+}
+.Main .Body {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
 }
