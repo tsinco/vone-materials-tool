@@ -45,8 +45,8 @@ a:visited {
   overflow: hidden;
   margin: 0px;
   /*NOTE - Decrease from 150px or remove entirely if performance issues encontered */
-  box-shadow: inset 0px 0px 150px rgba(0, 0, 0, 0.4);
 }
+
 h1 {
   /* width: 500px; */
   padding-top: 50px;
@@ -54,12 +54,6 @@ h1 {
   /* text-align: center; */
 }
 
-.button:disabled,
-button[disabled] {
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-}
 .Main .ActionButtons {
   position: relative;
   padding-top: 100px;

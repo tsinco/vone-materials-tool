@@ -80,7 +80,7 @@ type InkDefinition = {
   settings: Settings;
 };
 export function setDefaultToValue(setting: InkSetting): InkSettingT {
-  const { min, max, defaultValue, precision, value } = setting;
+  const { min, max, precision, value } = setting;
   return {
     min,
     max,
@@ -90,18 +90,13 @@ export function setDefaultToValue(setting: InkSetting): InkSettingT {
 }
 function setSettings(settings: InkSettingsT): Settings {
   const newSettingMap = new Map();
-  const newSettingObj = Object.entries(settings);
 
-  for (const [key, value] of newSettingObj) {
-    if (value && typeof Object) {
-      const nestedMap = new Map();
-      const nestedObj = Object.entries(value);
-      for (const [key, value] of nestedObj) {
-        nestedMap.set(key, setDefaultToValue(value));
-      }
-      newSettingMap.set(key, Object.fromEntries(nestedMap));
-    } else {
+  for (const [groupName, group] of Object.entries(settings)) {
+    const nestedMap = new Map();
+    for (const [fieldName, value] of Object.entries(group)) {
+      nestedMap.set(fieldName, setDefaultToValue(value));
     }
+    newSettingMap.set(groupName, Object.fromEntries(nestedMap));
   }
   return Object.fromEntries(newSettingMap);
 }
@@ -131,4 +126,3 @@ export function createInkDefinition({
     settings: setSettings(settings),
   };
 }
-//return inksetting type (no value)
