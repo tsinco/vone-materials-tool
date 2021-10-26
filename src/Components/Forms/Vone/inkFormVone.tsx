@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import download from "./download";
 import { useState, useEffect } from "react";
-import "../form.css";
+import "../_Inkform.scss";
 import { InkSettingsControl } from "@volterainc/ui-ink";
 import { Ink, alterInk } from "@volterainc/utils-ink";
 import defaultValue from "./template.test";
@@ -26,7 +26,7 @@ const Form: React.FC<inkProps> = (props) => {
   };
 
   return (
-    <div className="Body">
+    <div className="ink-form">
       <form onSubmit={onSubmit}>
         <div>
           <h2>Details</h2>

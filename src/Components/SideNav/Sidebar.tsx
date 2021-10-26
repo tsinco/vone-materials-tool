@@ -1,5 +1,5 @@
 import React from "react";
-import "./SideNav.css";
+import "./_SideNav.scss";
 import { SidebarData } from "./SidebarData";
 import Logout from "../Authentication/Logout";
 

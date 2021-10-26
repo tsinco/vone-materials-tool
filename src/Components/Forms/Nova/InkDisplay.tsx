@@ -1,7 +1,7 @@
 import FormNova from "./inkFormNova";
 import { useState } from "react";
 import { Loadmaterials_Nova } from "../Database/NovaMaterials";
-import ActionButton from "../Buttons/actionButtons";
+import ActionButton from "../Buttons/ActionButtons";
 
 const InkDisplay: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
