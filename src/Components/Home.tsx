@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.css";
+import "./Home.scss";
 import { useState } from "react";
 import NovaHome from "./Forms/Nova/NovaHome";
 import VoneHome from "./Forms/Vone/VoneHome";
@@ -23,9 +23,9 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="grid-container">
+    <div className="main-container">
       <Sidebar />
-      <div className="Back">
+      <div className="topNav">
         <a onClick={BacktoPlatform}>{"<<Back"}</a>
       </div>
       {platform === "" ? (

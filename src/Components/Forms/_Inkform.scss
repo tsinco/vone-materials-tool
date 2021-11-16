@@ -1,0 +1,30 @@
+@mixin flexBox($width, $margin) {
+  width: $width;
+  margin: $margin;
+  padding: 12px 20px;
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.ink-form {
+  display: flex;
+  text-align: left;
+  justify-content: center;
+  .details {
+    align-items: left;
+    width: auto;
+  }
+  label {
+    width: 140px;
+    text-align: left;
+  }
+  input[type="text"],
+  select {
+    @include flexBox(auto, 10px 1);
+  }
+  // input[type="number"],
+  // select {
+  //   @include flexBox(100%, 15px 0);
+  // }
+}

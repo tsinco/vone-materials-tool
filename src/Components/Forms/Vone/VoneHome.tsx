@@ -1,6 +1,6 @@
-import Form from "./inkFormVone";
+import Form from "./InkFormVone";
 import { useState } from "react";
-import ActionButton from "../Buttons/actionButtons";
+import ActionButton from "../Buttons/ActionButtons";
 import DisplayMaterials from "../Database/VoneMaterials";
 import { Ink } from "@volterainc/utils-ink";
 import defaultValue from "./template.test";
@@ -21,7 +21,7 @@ const VoneHome: React.FC = () => {
       {!istemplateavailable ? (
         <div>
           <h1>Select Material</h1>
-          <div className="Body">
+          <div className="display-materials">
             <DisplayMaterials
               parentCallback={(ink: any) => setSelectedInk(new Ink(ink))}
             />

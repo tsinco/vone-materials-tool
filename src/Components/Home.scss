@@ -1,0 +1,26 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  background-color: #313131;
+  background-image: url(~@volterainc/app-resources/images/grid.png);
+  background-size: auto;
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  .topNav {
+    background-color: #313131;
+    flex-direction: row;
+    align-items: stretch;
+    color: white;
+  }
+  h1 {
+    padding-top: 50px;
+    margin: 0 auto;
+  }
+  .Main {
+    color: white;
+    text-align: center;
+
+    @import "./Forms/Vone/VoneHome";
+  }
+}

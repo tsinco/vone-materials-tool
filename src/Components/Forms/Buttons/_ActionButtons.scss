@@ -1,0 +1,23 @@
+.ActionButtons {
+  position: relative;
+  padding-top: 100px;
+  margin: 0 auto;
+  justify-content: space-between;
+
+  .button {
+    background-color: transparent;
+    color: white;
+    border: 2px solid #555555;
+    padding: 16px 32px;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+  }
+}
