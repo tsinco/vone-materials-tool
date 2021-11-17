@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import React from "react";
-import Home from "./Components/Home";
+import Main from "./Components/Main";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./Components/Authentication/Login";
 import Signup from "./Components/Authentication/Signup";
@@ -12,8 +12,11 @@ function App() {
       <AuthProvider>
         <Switch>
           <React.Fragment>
-            <PrivateRoute exact path="/" component={Home}></PrivateRoute>
-            <Container>
+            <PrivateRoute exact path="/" component={Main}></PrivateRoute>
+            <Container
+              className="d-flex align-items-center justify-content-center"
+              style={{ minHeight: "100vh" }}
+            >
               <Route exact path="/login" component={Login}></Route>
               <Route exact path="/signup" component={Signup}></Route>
             </Container>

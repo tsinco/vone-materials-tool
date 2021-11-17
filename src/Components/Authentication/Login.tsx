@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import "../Main.scss";
 
 const googlelogo =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png";

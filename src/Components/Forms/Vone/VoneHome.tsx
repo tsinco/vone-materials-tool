@@ -41,7 +41,6 @@ const VoneHome: React.FC = () => {
         </div>
       ) : (
         <div>
-          <a onClick={() => setTemplateAvailable(false)}>Back to Templates</a>
           <Form ink={selectedInk} />
         </div>
       )}
