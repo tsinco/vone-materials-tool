@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
-import download from "./download";
+import download from "../Actions/download";
 import { useState, useEffect } from "react";
-import "../_Inkform.scss";
+import "../Actions/_Inkform.scss";
 import { InkSettingsControl } from "@volterainc/ui-ink";
 import { Ink, alterInk } from "@volterainc/utils-ink";
-import defaultValue from "./template.test";
+import defaultValue from "./defaultValue";
 import { createInkDefinition } from "./hydration";
 interface inkProps {
   ink: Ink;
@@ -12,15 +12,18 @@ interface inkProps {
 const Form: React.FC<inkProps> = (props) => {
   const { reset, handleSubmit, register } = useForm({});
   const [newInk, setNewInk] = useState(new Ink(defaultValue));
+
   useEffect(() => {
     reset(props.ink);
     setNewInk(props.ink);
   }, []);
+
   const onSubmit = handleSubmit(() => {
     const formattedInk = createInkDefinition(newInk);
     const data = JSON.stringify(formattedInk);
     download(data, newInk.name + ".json", "text/plain");
   });
+
   const handleOnChange = (ink: Ink, path: string, value: number | string) => {
     setNewInk(alterInk(ink, path, value));
   };

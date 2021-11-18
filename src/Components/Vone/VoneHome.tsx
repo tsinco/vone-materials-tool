@@ -1,20 +1,12 @@
 import Form from "./InkFormVone";
 import { useState } from "react";
-import ActionButton from "../Buttons/ActionButtons";
-import DisplayMaterials from "../Database/VoneMaterials";
+import ActionButton from "../Actions/Buttons/ActionButtons";
+import DisplayMaterials from "../Actions/Database/VoneMaterials";
 import { Ink } from "@volterainc/utils-ink";
-import defaultValue from "./template.test";
+import defaultValue from "./defaultValue";
 const VoneHome: React.FC = () => {
   const [istemplateavailable, setTemplateAvailable] = useState(false);
   const [selectedInk, setSelectedInk] = useState(new Ink(defaultValue));
-
-  const useTemplate = () => {
-    setTemplateAvailable(true);
-  };
-  const blankTemplate = () => {
-    setSelectedInk(new Ink(defaultValue));
-    setTemplateAvailable(true);
-  };
 
   return (
     <div className="Main">
@@ -30,12 +22,15 @@ const VoneHome: React.FC = () => {
             <ActionButton
               name="Blank Template"
               disabled={false}
-              onClick={blankTemplate}
+              onClick={() => {
+                setSelectedInk(new Ink(defaultValue));
+                setTemplateAvailable(true);
+              }}
             />
             <ActionButton
               name="Use Template"
               disabled={selectedInk.name === ""}
-              onClick={useTemplate}
+              onClick={() => setTemplateAvailable(true)}
             />
           </div>
         </div>

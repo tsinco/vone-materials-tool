@@ -1,8 +1,8 @@
 import React from "react";
 import "./Main.scss";
 import { useState } from "react";
-import NovaHome from "./Forms/Nova/NovaHome";
-import VoneHome from "./Forms/Vone/VoneHome";
+import NovaHome from "./Nova/NovaHome";
+import VoneHome from "./Vone/VoneHome";
 import Sidebar from "./SideNav/Sidebar";
 import { JumboButton } from "@volterainc/ui-core";
 
@@ -31,6 +31,8 @@ const Home: React.FC = () => {
       return <NovaHome />;
     case "Vone":
       return <VoneHome />;
+    case "None":
+      return <Home />;
   }
   return (
     <div>

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 // import { GetInkProps } from "../Database/NovaMaterials";
-import "../_Inkform.scss";
+// import "./Forms/_Inkform.scss";
 interface profile {
   name?: string;
   inktype?: string;
