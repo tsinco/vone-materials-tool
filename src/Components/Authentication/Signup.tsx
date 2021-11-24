@@ -20,15 +20,16 @@ const Signup: React.FC = () => {
   const { signup }: any = useAuth();
   const history = useHistory();
 
+  //catch error getting triggered ***fix
   async function onSubmit(e: React.ChangeEvent<HTMLInputElement>) {
     if (
-      passwordRef.current?.value === confirmpasswordRef.current?.value &&
-      emailRef.current?.value.includes("voltera.io")
+      passwordRef.current?.value === confirmpasswordRef.current?.value
+      // && emailRef.current?.value.includes("voltera.io")
     ) {
       try {
-        setError("");
         setLoading(true);
         await signup(emailRef.current?.value, passwordRef.current?.value);
+
         history.push("/");
       } catch {
         setError("existing user or unauthorized email");

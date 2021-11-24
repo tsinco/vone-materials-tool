@@ -21,7 +21,7 @@
   }
   input[type="text"],
   select {
-    @include flexBox(auto, 10px 1);
+    @include flexBox(100%, 10px 1);
   }
   // input[type="number"],
   // select {

@@ -1,20 +1,17 @@
-import { relative } from "path";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../index";
+import { FetchMaterials_Vone } from "./VoneMaterials";
 
 export function Loadmaterials_Nova() {
   const [data, setData] = useState([""]);
-  const VoneCollection = db.collection("Vone");
+  const materials = db.collection("materials");
 
   useEffect(() => {
     try {
-      VoneCollection.get().then((querySnapshot) => {
+      materials.get().then((querySnapshot) => {
         querySnapshot.docs.forEach((result) => {
-          if (data[0] === "") {
-            data[0] = result.data()["Id"];
-          } else {
-            setData((arr) => [...arr, result.data()["Id"]]);
-          }
+          setData((arr) => [...arr, result.data()["Id"]]);
+          console.log(result.data());
         });
       });
     } catch {
@@ -25,17 +22,12 @@ export function Loadmaterials_Nova() {
     data,
   };
 }
-// export function GetInkProps(inkID: string) {
-//   const [data, setData] = useState([""]);
-//   const VoneCollection = db.collection("Vone").doc(inkID);
 
-//   useEffect(() => {
-//    VoneCollection.get().then((querySnapshot) => {
-//         querySnapshot.data((result) => {
-//        result.
+// function getCollection(Id: string) {
 
-//   }, []);
-//   return {
-//     data,
-//   };
-// }
+//   db.collection("materials").doc(Id).get().then((querySnapshot => {
+//     console.log(querySnapshot)
+//   })
+
+//   return ();
+//  }

@@ -1,14 +1,16 @@
 import { useForm } from "react-hook-form";
-import download from "../Actions/download";
+import download from "../../Actions/download";
 import { useState, useEffect } from "react";
-import "../Actions/_Inkform.scss";
+import "./_Inkform.scss";
 import { InkSettingsControl } from "@volterainc/ui-ink";
 import { Ink, alterInk } from "@volterainc/utils-ink";
-import defaultValue from "./defaultValue";
-import { createInkDefinition } from "./hydration";
+import defaultValue from "../defaultValue";
+import { createInkDefinition } from "../hydration";
+
 interface inkProps {
   ink: Ink;
 }
+
 const Form: React.FC<inkProps> = (props) => {
   const { reset, handleSubmit, register } = useForm({});
   const [newInk, setNewInk] = useState(new Ink(defaultValue));

@@ -23,7 +23,7 @@ const Main: React.FC = () => {
   );
 };
 
-const Home: React.FC = () => {
+const Home = () => {
   const [platform, setPlatform] = useState<Platform>(Platform.NONE);
 
   switch (platform) {
@@ -31,8 +31,8 @@ const Home: React.FC = () => {
       return <NovaHome />;
     case "Vone":
       return <VoneHome />;
-    case "None":
-      return <Home />;
+    // case "None":
+    //   return <Main />;
   }
   return (
     <div>
