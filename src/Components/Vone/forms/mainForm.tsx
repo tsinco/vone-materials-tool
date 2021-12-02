@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
 import download from "../../Actions/download";
 import { useState, useEffect } from "react";
-import "./_Inkform.scss";
+import "./Inkform.scss";
 import { InkSettingsControl } from "@volterainc/ui-ink";
 import { Ink, alterInk } from "@volterainc/utils-ink";
 import defaultValue from "../defaultValue";
 import { createInkDefinition } from "../hydration";
+import TextInput from "./TextInput";
+import ActionButton from "../../Actions/Buttons/ActionButtons";
 
 interface inkProps {
   ink: Ink;
@@ -36,38 +38,45 @@ const Form: React.FC<inkProps> = (props) => {
         <div>
           <h2>Details</h2>
 
-          <label htmlFor="type">Ink Type</label>
-          <input
+          <TextInput
+            label="Ink Type"
             name="type"
             type="text"
             ref={register({ required: true })}
             disabled={true}
+            value={newInk.type}
           />
-          <label htmlFor="name"> Name</label>
-          <input
+
+          <TextInput
+            label="Name"
             name="name"
             type="text"
             ref={register({ required: true })}
             onChange={(e) => handleOnChange(newInk, "name", e.target.value)}
+            value={newInk.name}
           />
-          <label htmlFor="description">Description</label>
-          <input
+
+          <TextInput
+            label="Description"
             name="description"
             type="text"
             ref={register({ required: true })}
             onChange={(e) =>
               handleOnChange(newInk, "description", e.target.value)
             }
+            value={newInk.description}
           />
-          <label htmlFor="useBy"> Expiration Date: </label>
-          <input
+
+          <TextInput
+            label="Expiration Date:"
             name="useBy"
             type="date"
             ref={register({ required: true })}
             onChange={(e) => handleOnChange(newInk, "useBy", e.target.value)}
+            value={newInk.useBy}
           />
         </div>
-        <div>
+        <div className="ink-settings">
           <h3>Settings</h3>
           <InkSettingsControl
             ink={newInk}
@@ -75,7 +84,13 @@ const Form: React.FC<inkProps> = (props) => {
             onChange={handleOnChange}
           />
         </div>
-        <button type="submit">Download</button>
+        <div className="ActionButtons">
+          <ActionButton
+            name="Download JSON"
+            disabled={false}
+            onClick={onSubmit}
+          />
+        </div>
       </form>
     </div>
   );

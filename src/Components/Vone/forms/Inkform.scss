@@ -1,3 +1,5 @@
+@import "../../Actions/Buttons/ActionButtons";
+
 @mixin flexBox($width, $margin) {
   width: $width;
   margin: $margin;
@@ -21,10 +23,12 @@
   }
   input[type="text"],
   select {
-    @include flexBox(100%, 10px 1);
+    @include flexBox(50%, 10px 1);
   }
-  // input[type="number"],
-  // select {
-  //   @include flexBox(100%, 15px 0);
-  // }
+}
+.ink-settings {
+  input[type="text"],
+  select {
+    @include flexBox(auto, 10px 1);
+  }
 }

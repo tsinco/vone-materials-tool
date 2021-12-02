@@ -1,4 +1,4 @@
-import Form from "./forms/mainForm";
+import Form from "./forms/MainForm";
 import { useState } from "react";
 import ActionButton from "../Actions/Buttons/ActionButtons";
 import DisplayMaterials from "../Actions/Database/VoneMaterials";

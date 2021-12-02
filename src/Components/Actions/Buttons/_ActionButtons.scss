@@ -1,6 +1,6 @@
 .ActionButtons {
   position: relative;
-  padding-top: 100px;
+  padding-top: 20px;
   margin: 0 auto;
   justify-content: space-between;
 
@@ -12,7 +12,7 @@
     margin: 10px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inline;
     font-size: 16px;
 
     &:hover {

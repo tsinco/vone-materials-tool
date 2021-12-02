@@ -24,7 +24,7 @@
     "strictNullChecks": true,
     "declaration": true
   },
-  "include": ["src"],
+  "include": ["src", "src/Components/Vone/forms/.Dispensing.tsx"],
   "exclude": [
     "node_modules",
     "build",

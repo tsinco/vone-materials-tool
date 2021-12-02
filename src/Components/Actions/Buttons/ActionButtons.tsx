@@ -14,9 +14,11 @@ class ActionButton extends PureComponent<Props> {
   render() {
     const { disabled, onClick, name } = this.props;
     return (
+      // <div className="ActionButtons">
       <button className="button" disabled={disabled} onClick={onClick}>
         {name}
       </button>
+      // </div>
     );
   }
 }
