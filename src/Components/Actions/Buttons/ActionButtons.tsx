@@ -1,21 +1,22 @@
 import { PureComponent } from "react";
 type Props = {
   name?: string;
-  disabled?: boolean;
+  hidden?: boolean;
+
   onClick?: () => any;
 };
 
 class ActionButton extends PureComponent<Props> {
   static defaultProps = {
     text: "",
-    disabled: false,
+    hidden: false,
   };
 
   render() {
-    const { disabled, onClick, name } = this.props;
+    const { hidden, onClick, name } = this.props;
     return (
       // <div className="ActionButtons">
-      <button className="button" disabled={disabled} onClick={onClick}>
+      <button className="button" hidden={hidden} onClick={onClick}>
         {name}
       </button>
       // </div>

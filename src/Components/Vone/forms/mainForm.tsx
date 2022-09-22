@@ -9,7 +9,7 @@ import { createInkDefinition } from "../hydration";
 import TextInput from "./TextInput";
 import ActionButton from "../../Actions/Buttons/ActionButtons";
 
-interface inkProps {
+export interface inkProps {
   ink: Ink;
 }
 
@@ -33,7 +33,7 @@ const Form: React.FC<inkProps> = (props) => {
   };
 
   return (
-    <div className="ink-form">
+    <><h1>Ink Form</h1><div className="ink-form">
       <form onSubmit={onSubmit}>
         <div>
           <h2>Details</h2>
@@ -44,8 +44,7 @@ const Form: React.FC<inkProps> = (props) => {
             type="text"
             ref={register({ required: true })}
             disabled={true}
-            value={newInk.type}
-          />
+            value={newInk.type} />
 
           <TextInput
             label="Name"
@@ -53,19 +52,15 @@ const Form: React.FC<inkProps> = (props) => {
             type="text"
             ref={register({ required: true })}
             onChange={(e) => handleOnChange(newInk, "name", e.target.value)}
-            value={newInk.name}
-          />
+            value={newInk.name} />
 
           <TextInput
             label="Description"
             name="description"
             type="text"
             ref={register({ required: true })}
-            onChange={(e) =>
-              handleOnChange(newInk, "description", e.target.value)
-            }
-            value={newInk.description}
-          />
+            onChange={(e) => handleOnChange(newInk, "description", e.target.value)}
+            value={newInk.description} />
 
           <TextInput
             label="Expiration Date:"
@@ -73,26 +68,24 @@ const Form: React.FC<inkProps> = (props) => {
             type="date"
             ref={register({ required: true })}
             onChange={(e) => handleOnChange(newInk, "useBy", e.target.value)}
-            value={newInk.useBy}
-          />
+            value={newInk.useBy} />
         </div>
         <div className="ink-settings">
           <h3>Settings</h3>
           <InkSettingsControl
             ink={newInk}
             disabled={false}
-            onChange={handleOnChange}
-          />
+            onChange={handleOnChange} />
         </div>
         <div className="ActionButtons">
           <ActionButton
             name="Download JSON"
-            disabled={false}
-            onClick={onSubmit}
-          />
+            hidden={false}
+            onClick={onSubmit} />
         </div>
       </form>
-    </div>
+    </div></>
+      
   );
 };
 export default Form;

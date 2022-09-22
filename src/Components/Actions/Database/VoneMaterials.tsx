@@ -51,10 +51,13 @@ export function FetchMaterials_Vone() {
 const DisplayMaterials = ({ parentCallback }: any) => {
   const data = FetchMaterials_Vone();
   const [isSelected, setIselected] = useState(false);
+  const [isOpen, setIsopen] = useState(false);
   const handleOnclick = (selectedInk: any) => {
     parentCallback(selectedInk);
     setIselected(true);
-  };
+    setIsopen(true);
+  }
+    
   return (
     <ul>
       {data.length === 0 ? (

@@ -1,4 +1,4 @@
-import Form from "./forms/MainForm";
+import Form from "./forms/mainForm";
 import { useState } from "react";
 import ActionButton from "../Actions/Buttons/ActionButtons";
 import DisplayMaterials from "../Actions/Database/VoneMaterials";
@@ -22,15 +22,15 @@ const VoneHome: React.FC = () => {
           <div className="ActionButtons">
             <ActionButton
               name="Blank Template"
-              disabled={false}
+              hidden={false}
               onClick={() => {
                 setSelectedInk(new Ink(defaultValue));
                 setFormReady(true);
               }}
             />
             <ActionButton
-              name="Use Template"
-              disabled={selectedInk.name === ""}
+              name={`Use : ${selectedInk.name}` }
+              hidden={selectedInk.name === ""}
               onClick={() => setFormReady(true)}
             />
           </div>

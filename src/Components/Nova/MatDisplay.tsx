@@ -26,16 +26,16 @@ const MatDisplay: React.FC = () => {
           <div className="ActionButtons">
             <ActionButton
               name="Blank Template"
-              disabled={false}
+              hidden={false}
               onClick={() => {}}
             />
             <ActionButton
               name="Use Template"
-              disabled={false}
+              hidden={false}
               onClick={() => {}}
             />
-            <ActionButton name="Update" disabled={false} />
-            <ActionButton name="Delete" disabled={false} />
+            <ActionButton name="Update" hidden={false} />
+            <ActionButton name="Delete" hidden={false} />
           </div>
         </div>
       </div>

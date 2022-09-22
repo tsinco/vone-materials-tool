@@ -39,7 +39,7 @@ const Home = () => {
       <h1>Select Platform</h1>
       <div className="ActionButtons">
         <JumboButton text="Vone" onClick={() => setPlatform(Platform.VONE)} />
-        <JumboButton text="Nova" onClick={() => setPlatform(Platform.NOVA)} />
+        <JumboButton text="Nova" onClick={() => setPlatform(Platform.NOVA)} disabled={true} />
       </div>
     </div>
   );
